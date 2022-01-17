@@ -68,3 +68,4 @@ gem 'inky-rb', require: 'inky'            # foundation emails templating pre-pro
 gem 'bootstrap', '~> 4.6.1'
 gem 'jquery-rails'
 gem 'premailer-rails'
+gem "figaro"

@@ -1,4 +1,6 @@
 class AuctionsController < ApplicationController
+  before_action :authenticate_user!, except: %i[ index ]
+  before_action :admin_check, except: %i[ index ]
   before_action :set_auction, only: %i[ show edit update destroy ]
 
   # GET /auctions or /auctions.json
@@ -65,6 +67,6 @@ class AuctionsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def auction_params
-      params.fetch(:auction, {})
+      params.require(:auction).permit!
     end
 end
