@@ -69,3 +69,6 @@ gem 'bootstrap', '~> 4.6.1'
 gem 'jquery-rails'
 gem 'premailer-rails'
 gem "figaro"
+gem 'credit_card_validations'
+gem "parsley-rails"
+gem 'simple_form'

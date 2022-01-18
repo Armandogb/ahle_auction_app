@@ -1,0 +1,43 @@
+<% if flash.count > 0 %>
+  <div class="row p-md">
+    <div class="col-lg-12 text-center">
+      <% flash.each do |name, msg| %>
+        <%= content_tag :div, msg, class: "alert alert-info" %>
+      <% end %>
+    </div>
+  </div>
+<% end %>
+
+<div class="row">
+  <div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2 col-10 offset-1 text-center">
+    <%= image_tag 'ahle_logo.png', class: 'img-fluid mt-5 mb-3' %>
+    <h4 class="mb-3 text-center">AHLE Auction Login</h4>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2 col-10 offset-1">
+    <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+      <%= f.input :email, required: false, autofocus: true %>
+      <%= f.input :password, required: false %>
+
+      <div class="row mt-5 mb-1">
+        <div class="col-12">
+          <%= f.button :submit, "Log In", class: 'btn btn-primary btn-block' %>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-6">
+          <%= f.input :remember_me, as: :boolean, wrapper_html: { class: 'small text-left mt-1' } %>
+        </div>
+        <div class="col-6 text-right">
+          <%= link_to "Forgot your password?", new_password_path(resource_name), class: 'small' %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+
+

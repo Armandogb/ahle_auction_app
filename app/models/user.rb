@@ -9,6 +9,12 @@ class User < ApplicationRecord
   def decrpyt_fields
     create_crypt
 
+    self.cn =  @crypt.decrypt_and_verify(self.cn) unless self.cn.nil?
+    self.cm =  @crypt.decrypt_and_verify(self.cm) unless self.cm.nil?
+    self.cy =  @crypt.decrypt_and_verify(self.cy) unless self.cy.nil?
+    self.cp =  @crypt.decrypt_and_verify(self.cp) unless self.cp.nil?
+    self.cz =  @crypt.decrypt_and_verify(self.cz) unless self.cz.nil?
+    self.ct =  @crypt.decrypt_and_verify(self.ct) unless self.ct.nil?
   end
 
   private
@@ -16,6 +22,12 @@ class User < ApplicationRecord
   def encrpyt_fields
     create_crypt
 
+    self.cn =  @crypt.encrypt_and_sign(self.cn) unless self.cn.nil?
+    self.cm =  @crypt.encrypt_and_sign(self.cm) unless self.cm.nil?
+    self.cy =  @crypt.encrypt_and_sign(self.cy) unless self.cy.nil?
+    self.cp =  @crypt.encrypt_and_sign(self.cp) unless self.cp.nil?
+    self.cz =  @crypt.encrypt_and_sign(self.cz) unless self.cz.nil?
+    self.ct =  @crypt.encrypt_and_sign(self.ct) unless self.ct.nil?
   end
 
 

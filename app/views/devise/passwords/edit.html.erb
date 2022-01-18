@@ -1,0 +1,74 @@
+<% if flash.count > 0 %>
+  <div class="row p-md">
+    <div class="col-lg-12 text-center">
+      <% flash.each do |name, msg| %>
+        <%= content_tag :div, msg, class: "alert alert-info" %>
+      <% end %>
+    </div>
+  </div>
+<% end %>
+
+<div class="row">
+  <div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2 col-10 offset-1 text-center">
+    <%= image_tag 'ahle_logo.png', class: 'img-fluid mt-5 mb-3' %>
+    <h4 class="mb-3 text-center">AHLE Auction Forgot Password</h4>
+  </div>
+</div>
+
+<div class="row mt-1">
+  <div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2 col-10 offset-1">
+    <%= simple_form_for(resource, as: resource_name, url: password_path(resource_name),
+                        data: { 'parsley-validate': '' }, html: { method: :put }) do |f| %>
+      <% pwd_minlength = 6 %>
+
+      <!-- Error Notification -->
+      <% if @user.errors.any? %>
+        <div class="row mb-3">
+          <div class="col-12">
+            <div class="card bg-light text-danger text-small">
+              <div class="card-header alert alert-danger mb-0">Please review the problems below:</div>
+              <div class="card-body">
+                <ul class="m-0">
+                  <% @user.errors.full_messages.each do |message| %>
+                    <li><%= message %></li>
+                  <% end %>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
+
+      <%= f.error_notification %>
+
+      <div class="form-inputs">
+        <%= f.input :password, label: "New Password", required: true, autofocus: true do %>
+          <%= f.input_field :password, maxlength: 50, minlength: pwd_minlength, required: true,
+                            autocomplete: "new-password", class: 'form-control',
+                            oninput: "this.value = this.value.slice(0, this.maxLength);" %>
+          <small class="form-text text-muted">Minimum <%= pwd_minlength %> characters.</small>
+        <% end %>
+
+        <% password_confirmation_data = { 'parsley-equalto': '#user_password', 'parsley-maxlength': 50,
+                                          'parsley-minlength': pwd_minlength } %>
+        <%= f.input :password_confirmation, label: 'Password Confirmation', required: true,
+                    maxlength: 50, minlength: pwd_minlength,
+                    input_html: { autocomplete: "new-password",
+                                  data: password_confirmation_data,
+                                  oninput: "this.value = this.value.slice(0, this.maxLength);" } %>
+
+        <%= f.input :reset_password_token, as: :hidden %>
+        <%= f.full_error :reset_password_token %>
+      </div>
+
+      <div class="form-actions row my-5">
+        <div class="col-8">
+          <%= f.button :submit, "Change Password", class: 'btn btn-primary btn-block' %>
+        </div>
+        <div class="col-4">
+          <%= link_to("Cancel", new_session_path(resource_name), class: 'btn btn-dark btn-block') %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

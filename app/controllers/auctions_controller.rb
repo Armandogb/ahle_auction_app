@@ -1,6 +1,6 @@
 class AuctionsController < ApplicationController
-  before_action :authenticate_user!, except: %i[ index ]
-  before_action :admin_check, except: %i[ index ]
+  before_action :authenticate_user!
+  # before_action :admin_check
   before_action :set_auction, only: %i[ show edit update destroy ]
 
   # GET /auctions or /auctions.json

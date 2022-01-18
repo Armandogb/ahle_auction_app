@@ -1,15 +1,34 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title>AhleAuctionApp</title>
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <%= csrf_meta_tags %>
 
-    <%= stylesheet_link_tag    'application', media: 'all' %>
-    <%= javascript_include_tag 'application' %>
-  </head>
+  <title>AHLE Auction</title>
 
-  <body>
-    <%= yield %>
-  </body>
+  <link rel="icon" type="image/png" href="/favicon.ico">
+  <%= stylesheet_link_tag 'application', media: 'all' %>
+
+</head>
+
+<body class="<%= controller_name %> <%= action_name %>">
+
+
+<div class="container-fluid mt-3">
+  <div class="row">
+    <main role="main" class="col-12">
+      <%= yield %>
+    </main>
+  </div>
+</div>
+
+
+<%= javascript_include_tag 'application' %>
+
+
+</body>
 </html>
+
