@@ -1,2 +1,44 @@
 @import "bootstrap";
 @import 'parsley';
+@import "font-awesome";
+
+$dark-blue : #25274D;
+$gray-blue : #464866;
+$light-gray : #AAABB8;
+$sky-blue : #2E9CCA;
+$water-blue : #29648A;
+
+html{
+font-family: "Helvetica Neue", Helvetica, Arial, Sans-Serif !important;
+}
+
+.navbar{
+  color: $sky-blue !important;
+  background: $water-blue;
+  .fa-1x {
+    font-size: 1.5rem !important;
+  }
+  .navbar-toggler.toggler-example {
+    cursor: pointer !important;
+  }
+  .nav-logo{
+    width: 50px;
+  }
+}
+
+
+.auctions{
+  background: $light-gray;
+  &.index{
+    .main_section{
+    }
+  }
+}
+
+.item_object{
+  .header{
+    color: $dark-blue;
+    background: $sky-blue;
+    padding: 5px 0;
+  }
+}

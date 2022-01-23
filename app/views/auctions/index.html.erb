@@ -1,27 +1,28 @@
-<p id="notice"><%= notice %></p>
 
-<h1>Auctions</h1>
+<div id="accordion">
 
-<div type="button" class="btn btn-primary"> hello </div>
+  <div class="card">
+    <div class="card-header" id="headingOne">
+      <h3 class="mb-0">
+        <div class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+          <div class="row">
+            <div class="col-9">
+              <i class="fa fa-arrow-circle-down" aria-hidden="true"></i>  Collapsible Group Item #1
+            </div>
+            <div class="col-3">
+              12:12:12
+            </div>
+          </div>
+        </div>
+      </h3>
+    </div>
+    <div id="collapseOne" class="collapse collapsed" aria-labelledby="headingOne" data-parent="#accordion">
+      <div class="card-body">
+          <%= render "auctions/partials/auction_items" %>
+        <%= render "auctions/partials/auction_items" %>
+        <%= render "auctions/partials/auction_items" %>
+      </div>
+    </div>
+  </div>
 
-<table>
-  <thead>
-    <tr>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @auctions.each do |auction| %>
-      <tr>
-        <td><%= link_to 'Show', auction %></td>
-        <td><%= link_to 'Edit', edit_auction_path(auction) %></td>
-        <td><%= link_to 'Destroy', auction, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Auction', new_auction_path %>
+</div>

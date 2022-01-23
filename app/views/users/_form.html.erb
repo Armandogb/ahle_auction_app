@@ -1,0 +1,98 @@
+<% if flash.count > 0 %>
+  <div class="row p-md">
+    <div class="col-lg-12 text-center">
+      <% flash.each do |name, msg| %>
+        <%= content_tag :div, msg, class: "alert alert-info" %>
+      <% end %>
+    </div>
+  </div>
+<% end %>
+
+<% is_edit = action_name == 'edit' || action_name == 'update' ? true : false %>
+
+<% form_options = {data: { 'parsley-validate': '' } } %>
+<% form_options[:html] = { method: :put } if is_edit %>
+
+
+
+<%= simple_form_for(@user, form_options) do |f| %>
+  <% pwd_minlength = 6 %>
+
+  <%= f.error_notification %>
+
+  <div class="form-inputs my-3">  <%# START: FORM-INPUTS %>
+
+    <div class="form-row">
+      <div class="col-sm-12">
+        <% first_name_data = { 'parsley-maxlength': 200 } %>
+        <%= f.input :name, label: 'Name on Card', autofocus: params[:action] == 'new',
+                    maxlength: 50, input_html: { autocomplete: "first_name", data: first_name_data } %>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="col-sm-6">
+        <% email_data = { 'parsley-maxlength': 100 } %>
+        <%= f.input :email, maxlength: 100, required: !is_edit, input_html: { autocomplete: "email", data: email_data } %>
+      </div>
+      <% if is_edit %>
+        <div class="col-sm-6"></div>
+      <% else %>
+        <div class="col-sm-6">
+          <% email_confirmation_data = { 'parsley-equalto': '#user_email', 'parsley-maxlength': 100 } %>
+          <%= f.input :email_confirmation, label: 'Email Confirmation', maxlength: 100,
+                      required: !is_edit, input_html: { autocomplete: "email_confirmation", data: email_confirmation_data } %>
+        </div>
+      <% end %>
+    </div>
+
+
+    <div class="form-row">
+      <div class="col-sm-6">
+        <% password_data = { 'parsley-maxlength': 50, 'parsley-minlength': pwd_minlength } %>
+        <%= f.input :password, required: !is_edit do %>
+          <%= f.input_field :password, maxlength: 50, minlength: pwd_minlength, required: !is_edit,
+                            autocomplete: "new-password", class: 'form-control',
+                            data: password_data,
+                            oninput: "this.value = this.value.slice(0, this.maxLength);" %>
+          <% if is_edit %>
+            <small class="form-text text-muted">
+              Leave blank if not changing, else minimum <%= pwd_minlength %> characters.
+            </small>
+          <% else %>
+            <small class="form-text text-muted">
+              Minimum <%= pwd_minlength %> characters.
+            </small>
+          <% end %>
+        <% end %>
+      </div>
+      <div class="col-sm-6">
+        <% password_confirmation_data = { 'parsley-equalto': '#user_password', 'parsley-maxlength': 50,
+                                          'parsley-minlength': pwd_minlength } %>
+        <%= f.input :password_confirmation, label: 'Password Confirmation', required: !is_edit,
+                    maxlength: 50, minlength: pwd_minlength,
+                    input_html: { autocomplete: "new-password",
+                                  data: password_confirmation_data,
+                                  oninput: "this.value = this.value.slice(0, this.maxLength);" } %>
+      </div>
+    </div>
+
+
+  </div>  <%# END: FORM-INPUTS %>
+
+
+    <div class="form-actions row mt-3 mb-5">
+      <div class="col-8">
+        <%= f.button :submit, "Submit", class: 'btn btn-primary btn-block' %>
+      </div>
+      <div class="col-4">
+        <% if is_edit %>
+          <%= link_to('Cancel', root_path, class: 'btn btn-dark btn-block') %>
+        <% else %>
+          <%= link_to('Cancel', root_path, class: 'btn btn-dark btn-block') %>
+        <% end %>
+      </div>
+    </div>
+
+
+<% end %>

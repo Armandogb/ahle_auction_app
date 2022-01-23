@@ -4,6 +4,8 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
+  attr_accessor :email_confirmation
+
   before_save :encrpyt_fields
 
   def decrpyt_fields

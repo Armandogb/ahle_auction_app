@@ -16,4 +16,5 @@
 //= require popper
 //= require bootstrap-sprockets
 //= require parsley
+//= require countdown.js
 //= require_tree .

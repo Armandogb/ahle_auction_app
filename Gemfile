@@ -72,3 +72,7 @@ gem "figaro"
 gem 'credit_card_validations'
 gem "parsley-rails"
 gem 'simple_form'
+gem 'font-awesome-rails'
+gem 'gon'
+gem 'carrierwave', '~> 2.0'
+gem 'twilio-ruby'
