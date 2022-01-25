@@ -8,6 +8,11 @@ class AuctionsController < ApplicationController
     @auctions = Auction.all
   end
 
+  def admin_index
+    @auctions = Auction.all
+    @sections = Section.all
+  end
+
   # GET /auctions/1 or /auctions/1.json
   def show
   end
@@ -25,27 +30,20 @@ class AuctionsController < ApplicationController
   def create
     @auction = Auction.new(auction_params)
 
-    respond_to do |format|
-      if @auction.save
-        format.html { redirect_to auction_url(@auction), notice: "Auction was successfully created." }
-        format.json { render :show, status: :created, location: @auction }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @auction.errors, status: :unprocessable_entity }
-      end
+    if @auction.save
+      redirect_to admin_index_path, notice: "Auction was successfully created."
+    else
+      render :new, status: :unprocessable_entity
     end
+
   end
 
   # PATCH/PUT /auctions/1 or /auctions/1.json
   def update
-    respond_to do |format|
-      if @auction.update(auction_params)
-        format.html { redirect_to auction_url(@auction), notice: "Auction was successfully updated." }
-        format.json { render :show, status: :ok, location: @auction }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @auction.errors, status: :unprocessable_entity }
-      end
+    if @auction.update(auction_params)
+      redirect_to admin_index_path, notice: "Auction was successfully updated."
+    else
+      render :edit, status: :unprocessable_entity
     end
   end
 
@@ -53,10 +51,8 @@ class AuctionsController < ApplicationController
   def destroy
     @auction.destroy
 
-    respond_to do |format|
-      format.html { redirect_to auctions_url, notice: "Auction was successfully destroyed." }
-      format.json { head :no_content }
-    end
+    redirect_to admin_index_path, notice: "Auction was successfully destroyed."
+
   end
 
   private

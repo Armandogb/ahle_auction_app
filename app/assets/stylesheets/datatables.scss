@@ -1,0 +1,111 @@
+@import "bootstrap/functions";
+
+//// optional remove '//=' to enable
+//
+//@import 'datatables/extensions/AutoFill/autoFill.bootstrap4';
+//@import 'datatables/extensions/ColReorder/colReorder.bootstrap4';
+//@import 'datatables/extensions/FixedColumns/fixedColumns.bootstrap4';
+//@import 'datatables/extensions/KeyTable/keyTable.bootstrap4';
+//@import 'datatables/extensions/RowReorder/rowReorder.bootstrap4';
+@import 'datatables/dataTables.bootstrap4';
+@import 'datatables/extensions/Buttons/buttons.bootstrap4';
+@import 'datatables/extensions/FixedHeader/fixedHeader.bootstrap4';
+@import 'datatables/extensions/Responsive/responsive.bootstrap4';
+@import 'datatables/extensions/RowGroup/rowGroup.bootstrap4';
+@import 'datatables/extensions/Scroller/scroller.bootstrap4';
+@import 'datatables/extensions/Select/select.bootstrap4';
+//@import 'datatables/searchPanes.min';
+
+
+// Datatables...
+.dataTables_wrapper {
+  //   - 'Actions' header column
+  table.dataTable thead tr th.actions {
+    width: 15%;
+  }
+
+  //  - filter/search box
+  .dataTables_filter {
+    display: inline-block;
+    float: left;
+  }
+
+  //  - info showing n - n of nnn
+  .dataTables_info {
+    display: inline-block;
+    float: right;
+    padding-right: 20px;
+  }
+
+  //  - pagination
+  .dataTables_paginate {
+    margin-top: 28px !important;
+
+    ul.pagination {
+      justify-content: flex-start !important;
+      margin: 1em 0px 1em 5px !important;
+    }
+  }
+
+  //  - search pane
+  .dtsp-panesContainer {
+    margin-top: 2em;
+    border-radius: 0px;
+  }
+}
+
+.pagination {
+  margin: 1em 0px .5em 0px;
+
+  a, em, span {
+    margin-left: 5px;
+    height: 25px;
+    line-height: 1.25;
+    padding: 3px 6px;
+    text-align: center;
+    text-decoration: none;
+  }
+
+  .page-item.disabled .page-link,
+  .previous_page.disabled,
+  .next_page.disabled,
+  span.gap {
+    background-color: $white;
+    border: 1px solid $gray-300;
+    border-radius: 3px;
+    pointer-events: none;
+    color: $gray-600;
+    cursor: auto;
+  }
+
+  a,
+  em:not(.current),
+  span:not(.gap):not(.disabled) {
+    background: $primary;
+    border: 1px solid $primary;
+    border-radius: 3px;
+    color: $white;
+  }
+
+  .page-link:focus,
+  a:focus {
+    outline: none;
+    box-shadow: none;
+  }
+
+  .page-item.active a,
+  em.current {
+    background: $gray-500;
+    border: 1px solid $gray-300;
+    border-radius: 3px;
+    color: $white;
+    font-style: normal;
+  }
+
+  .page-link:hover,
+  a:hover {
+    color: $primary;
+    background-color: $gray-500;
+    border-color: $gray-300;
+  }
+}

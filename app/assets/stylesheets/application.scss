@@ -1,6 +1,7 @@
 @import "bootstrap";
 @import 'parsley';
 @import "font-awesome";
+@import "datatables";
 
 $dark-blue : #25274D;
 $gray-blue : #464866;
@@ -28,7 +29,7 @@ font-family: "Helvetica Neue", Helvetica, Arial, Sans-Serif !important;
 
 
 .auctions{
-  background: $light-gray;
+  //background: $light-gray;
   &.index{
     .main_section{
     }
