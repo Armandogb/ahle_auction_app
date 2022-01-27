@@ -15,6 +15,16 @@
       <%= f.input :name, required: true %>
     </div>
     <div class="col-12">
+      <h5 class="card-title mb-2">Sections Linked to Auction</h5>
+      <%= f.input :section_ids,
+                  collection: Section.where(active: true),
+                  label_method: :title,
+                  label: false,
+                  input_html: { multiple: true, size: 15 },
+                  hint: 'Select as many sections, hold control / command while clicking.'
+      %>
+    </div>
+    <div class="col-12">
       <%= f.input :active, required: true %>
     </div>
   </div>

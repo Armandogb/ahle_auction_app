@@ -1,12 +1,52 @@
-
 <%= simple_form_for(@item) do |f| %>
   <%= f.error_notification %>
-  <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
 
-  <div class="form-inputs">
+  <div class="row mt-3">
+    <dix class="col-12">
+      <% unless @item.persisted? %>
+        <h3>New Item</h3>
+      <% end %>
+    </dix>
   </div>
 
-  <div class="form-actions">
-    <%= f.button :submit %>
+
+  <div class="form-row">
+    <div class="col-12">
+      <%= f.input :name, required: true %>
+    </div>
+    <div class="col-sm-6 ">
+      Item Photo<br>
+      <%= f.input :photo, as: :file, label: false, required: true %><br>
+      <%= f.hidden_field :photo_cache %>
+      <% if f.object.photo.url.present? %>
+        current: <%= image_tag(f.object.photo.decent_size.url , class: 'img-fluid') %>
+      <% else %>
+        current: None
+      <% end %>
+    </div>
+    <div class="col-sm-6">
+      <%= f.input :description, required: true, as: :text, :input_html => { :rows => 6 } %>
+    </div>
+    <div class="col-6 mt-2">
+      <%= f.input :starting_bid, required: true %>
+    </div>
+    <div class="col-6 mt-2">
+      <%= f.input :min_bid, required: true %>
+    </div>
+    <div class="col-12">
+      <%= f.input :active %>
+    </div>
+  </div>
+
+
+  <div class="row my-3">
+    <dix class="col-12">
+      <% if @item.persisted? %>
+        <%= f.submit 'Update Item Details', class:"btn btn-success btn-md" %>
+      <% else %>
+        <%= f.submit 'Create Item', class:"btn btn-success btn-md" %>
+      <% end %>
+      <%= link_to('Cancel', admin_index_path, class: "btn btn-secondary btn-md") %>
+    </dix>
   </div>
 <% end %>

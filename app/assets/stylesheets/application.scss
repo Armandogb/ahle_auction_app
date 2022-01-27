@@ -13,9 +13,16 @@ html{
 font-family: "Helvetica Neue", Helvetica, Arial, Sans-Serif !important;
 }
 
+.navbar-light .navbar-brand {
+  color: white !important;
+}
+
 .navbar{
   color: $sky-blue !important;
   background: $water-blue;
+  .fa-bars, .nav-link{
+    color: white !important;
+  }
   .fa-1x {
     font-size: 1.5rem !important;
   }

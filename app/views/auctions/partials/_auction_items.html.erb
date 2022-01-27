@@ -2,18 +2,18 @@
   <div class="col-12">
     <div class="row header mb-3">
       <div class="col-8 text-left title">
-        <h5>TEST TEST TEST TEST TEST TEST </h5>
+        <h5><%= item.name %></h5>
       </div>
       <div class="col-4 countdown text-right">
-        <h4>12:12:12</h4>
+        <h4><%= section.end_time %></h4>
       </div>
     </div>
     <div class="row mb-3">
       <div class="col-md-4 text-center">
-        <%= image_tag 'ahle_logo.png', class: 'img-fluid' %>
+        <img class="img-fluid" src="<%= item.photo.decent_size.url %>">
       </div>
       <div class="col-md-8">
-        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et.
+        <%= item.description %>
       </div>
     </div>
     <div class="row mb-3">

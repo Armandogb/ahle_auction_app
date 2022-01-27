@@ -9,9 +9,14 @@
   </div>
 <% end %>
 
+<div class="row">
+  <div class="col-12">
+    <section class="program-list mt-3">
+    <%= render 'auctions/partials/auction_table' %>
+    <%= render 'auctions/partials/sections_table' %>
+    <%= render 'auctions/partials/items_table' %>
+    </section>
+  </div>
+</div>
 
-<section class="program-list mt-3">
-  <%= render 'auctions/partials/auction_table' %>
-  <%= render 'auctions/partials/sections_table' %>
-</section>
 

@@ -5,12 +5,14 @@ class AuctionsController < ApplicationController
 
   # GET /auctions or /auctions.json
   def index
-    @auctions = Auction.all
+    @auctions = Auction.where(active: true).last
+    @sections = @auctions.sections
   end
 
   def admin_index
     @auctions = Auction.all
     @sections = Section.all
+    @items = Item.all
   end
 
   # GET /auctions/1 or /auctions/1.json
