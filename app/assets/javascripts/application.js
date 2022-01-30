@@ -17,5 +17,58 @@
 //= require bootstrap-sprockets
 //= require parsley
 //= require countdown.js
-
 //= require_tree .
+
+$( document ).ready(function() {
+
+    $('.bid_submit_but').click(function() {
+        let sub_but = $(this);
+        let $item_id = $(this).attr('data-itemid');
+        let $user_id = $(this).attr('data-userid');
+        let $bid = $("#modal_bid_"+$item_id).val();
+        let $form = $('#bid_form_'+$item_id);
+
+        $("#modal_message_"+$item_id).addClass('d-none');
+        $("#modal_message_"+$item_id).removeClass('alert-danger');
+        $("#modal_message_"+$item_id).removeClass('alert-success');
+        $form.parsley().validate();
+
+        if($form.parsley().isValid()){
+
+            if (confirm('Are you sure you would like to bid $'+$bid+'?')) {
+
+                $.get("/a/create_a_bid/"+$item_id+"/"+$user_id+"/"+$bid+".json", function(data, status){
+
+                    switch(data.status) {
+                        case 'ok':
+                            $("#modal_bid_"+$item_id).val(data.valid_bid);
+                            $("#modal_min_bid_"+$item_id).html(data.valid_bid);
+                            $("#item_bid_show_"+$item_id).html(data.highest);
+                            $("#modal_message_"+$item_id).addClass('alert-success');
+                            break;
+                        case 'closed':
+                            sub_but.addClass('d-none');
+                            $("#modal_user_actions_"+$item_id).addClass('d-none');
+                            $("#modal_bid_"+$item_id).addClass('d-none');
+                            $("#bid_pop_"+$item_id).addClass('d-none');
+                            $("#modal_message_"+$item_id).addClass('alert-danger');
+                            break;
+                        case 'outbid':
+                            $("#modal_bid_"+$item_id).val(data.valid_bid);
+                            $("#modal_min_bid_"+$item_id).html(data.valid_bid);
+                            $("#item_bid_show_"+$item_id).html(data.highest);
+                            $("#modal_message_"+$item_id).addClass('alert-danger');
+                            break;
+                        default:
+                        // code block
+                    };
+
+                    $("#modal_message_"+$item_id).removeClass('d-none');
+                    $("#modal_message_"+$item_id).html(data.message);
+
+                });
+            };
+        };
+    });
+
+});

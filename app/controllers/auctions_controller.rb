@@ -7,6 +7,7 @@ class AuctionsController < ApplicationController
   def index
     @auctions = Auction.where(active: true).last
     @sections = @auctions.sections
+    @user = current_user
   end
 
   def admin_index

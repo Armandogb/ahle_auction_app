@@ -2,11 +2,11 @@
   <%= f.error_notification %>
 
   <div class="row mt-3">
-    <dix class="col-12">
+    <div class="col-12">
       <% unless @item.persisted? %>
         <h3>New Item</h3>
       <% end %>
-    </dix>
+    </div>
   </div>
 
 
@@ -40,13 +40,13 @@
 
 
   <div class="row my-3">
-    <dix class="col-12">
+    <div class="col-12">
       <% if @item.persisted? %>
         <%= f.submit 'Update Item Details', class:"btn btn-success btn-md" %>
       <% else %>
         <%= f.submit 'Create Item', class:"btn btn-success btn-md" %>
       <% end %>
       <%= link_to('Cancel', admin_index_path, class: "btn btn-secondary btn-md") %>
-    </dix>
+    </div>
   </div>
 <% end %>

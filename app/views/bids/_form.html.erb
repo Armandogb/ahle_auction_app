@@ -1,0 +1,19 @@
+
+<%= simple_form_for(@bid) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-row">
+    <div class="col-12">
+      <%= f.input :value, required: true %>
+    </div>
+  </div>
+  <%= f.hidden_field :item_id, required: true, value: @item.id %>
+  <%= f.hidden_field :user_id, required: true, value: @user.id %>
+
+  <div class="row my-3">
+    <div class="col-12">
+      <%= f.submit 'Place Bid', class:"btn btn-success btn-md" %>
+      <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+    </div>
+  </div>
+<% end %>

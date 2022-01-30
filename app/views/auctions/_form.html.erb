@@ -2,11 +2,11 @@
   <%= f.error_notification %>
 
   <div class="row mt-3">
-    <dix class="col-12">
+    <div class="col-12">
       <% unless @auction.persisted? %>
         <h3>New Auction</h3>
       <% end %>
-    </dix>
+    </div>
   </div>
 
 
@@ -31,13 +31,13 @@
 
 
   <div class="row my-3">
-    <dix class="col-12">
+    <div class="col-12">
       <% if @auction.persisted? %>
         <%= f.submit 'Update Auction Details', class:"btn btn-success btn-md" %>
       <% else %>
         <%= f.submit 'Create Auction', class:"btn btn-success btn-md" %>
       <% end %>
         <%= link_to('Cancel', admin_index_path, class: "btn btn-secondary btn-md") %>
-    </dix>
+    </div>
   </div>
 <% end %>

@@ -1,0 +1,50 @@
+<!-- The Modal -->
+<div class="modal" id="bidModal_<%= item.id %>">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title"><span id="item_bid_modal_name"><%= item.name %></span></h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+        <div class="row">
+          <div class="d-none col-12 text-center alert" id="modal_message_<%= item.id %>" role="alert">
+          </div>
+        </div>
+        <div id="modal_user_actions_<%= item.id %>">
+          <%= simple_form_for(:bid, data: { 'parsley-validate': '' }, url: root_path, html: { id: "bid_form_#{item.id}"} ) do |f| %>
+            <div class="row">
+              <div class="col-8">
+                <h5>Minimum Bid: $<span id="modal_min_bid_<%= item.id %>"><%= bid_logic[:valid_bid] %></span><br> ($<%= item.min_bid %> Increments)</h5>
+              </div>
+              <div class="col-4">
+                <%= f.input :item_id, required: true, input_html: { value: bid_logic[:valid_bid], id: "modal_bid_#{item.id}" }, label: false %>
+              </div>
+            </div>
+          <% end %>
+        </div>
+
+      </div>
+        <div class="row">
+          <div class="col-1"></div>
+          <div class="col-7 mb-3">
+            <button type="button" class="btn btn-block btn-success bid_submit_but" data-itemid="<%= item.id %>" data-userid="<%= user.id %>">
+              Place Bid
+            </button>
+          </div>
+          <div class="col-3 mb-3">
+            <button type="button" class="btn btn-block btn-danger" data-dismiss="modal">
+              Close
+            </button>
+          </div>
+          <div class="col-1"></div>
+        </div>
+
+
+    </div>
+  </div>
+</div>

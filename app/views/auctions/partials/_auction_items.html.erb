@@ -1,8 +1,9 @@
+<% bid_logic = item.bid_values %>
 <div class="row mb-5 item_object">
   <div class="col-12">
     <div class="row header mb-3">
       <div class="col-8 text-left title">
-        <h5><%= item.name %></h5>
+        <h5><span id="item_bid_show_name"><%= item.name %></span></h5>
       </div>
       <div class="col-4 countdown text-right">
         <h4><%= section.end_time %></h4>
@@ -17,12 +18,25 @@
       </div>
     </div>
     <div class="row mb-3">
-      <div class="col-md-8 text-center mb-3">
-        Current Highest Bid: $12
+      <div class="col-md-6 text-left mb-3">
+        <% if DateTime.now > section.end_time %>
+         Winning Bid: $<span id="item_bid_show_<%= item.id %>"><%= bid_logic[:high_bid] %></span>
+        <% else %>
+          <% if bid_logic[:high_bid] == 0 %>
+            Starting Bid: $<span id="item_bid_show_<%= item.id %>"><%= bid_logic[:valid_bid] %></span>
+          <% else %>
+            Current Highest Bid: $<span id="item_bid_show_<%= item.id %>"><%= bid_logic[:high_bid] %></span>
+          <% end %>
+        <% end %>
       </div>
-      <div class="col-md-4">
-          <button class="btn btn-block btn-success">Bid</button>
+      <div class="col-md-6">
+        <% unless DateTime.now > section.end_time %>
+        <button type="button" id="bid_pop_<%= item.id %>" class="btn btn-block btn-success" data-toggle="modal" data-target="#bidModal_<%= item.id %>">
+          Bid
+        </button>
+        <% end %>
       </div>
     </div>
   </div>
+  <%= render partial: "auctions/partials/bid_modal", locals: { item: item, section: section, user: @user, bid_logic: bid_logic } %>
 </div>

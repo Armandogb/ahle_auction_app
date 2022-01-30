@@ -2,11 +2,11 @@
   <%= f.error_notification %>
 
   <div class="row mt-3">
-    <dix class="col-12">
+    <div class="col-12">
       <% unless @section.persisted? %>
         <h3>New Section</h3>
       <% end %>
-    </dix>
+    </div>
   </div>
 
 
@@ -37,13 +37,13 @@
 
 
   <div class="row my-3">
-    <dix class="col-12">
+    <div class="col-12">
       <% if @section.persisted? %>
         <%= f.submit 'Update Section Details', class:"btn btn-success btn-md" %>
       <% else %>
         <%= f.submit 'Create Section', class:"btn btn-success btn-md" %>
       <% end %>
       <%= link_to('Cancel', admin_index_path, class: "btn btn-secondary btn-md") %>
-    </dix>
+    </div>
   </div>
 <% end %>
