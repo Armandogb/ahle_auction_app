@@ -21,6 +21,24 @@
 
 $( document ).ready(function() {
 
+    gon.timers.forEach(a => {
+        let sect_id = a[0]
+        let time = a[1]
+
+        $('.section_timer_'+sect_id).countdown({
+            date: time,
+            day: 'Day',
+            days: 'Days',
+            hour: 'Hour',
+            hours: 'Hours',
+            minute: 'Minute',
+            minutes: 'Minutes',
+            second: 'Second',
+            seconds: 'Seconds'
+        }, function () {
+        });
+    });
+
     $('.bid_submit_but').click(function() {
         let sub_but = $(this);
         let $item_id = $(this).attr('data-itemid');

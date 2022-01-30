@@ -2,11 +2,11 @@
 <div class="row mb-5 item_object">
   <div class="col-12">
     <div class="row header mb-3">
-      <div class="col-8 text-left title">
+      <div class="col-md-6 mb-3 text-center">
         <h5><span id="item_bid_show_name"><%= item.name %></span></h5>
       </div>
-      <div class="col-4 countdown text-right">
-        <h4><%= section.end_time %></h4>
+      <div class="col-md-6">
+        <%= render partial: "auctions/partials/timer_partial", locals: { section: section } %>
       </div>
     </div>
     <div class="row mb-3">

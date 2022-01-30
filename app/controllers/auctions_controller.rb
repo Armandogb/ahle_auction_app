@@ -5,8 +5,9 @@ class AuctionsController < ApplicationController
 
   # GET /auctions or /auctions.json
   def index
-    @auctions = Auction.where(active: true).last
-    @sections = @auctions.sections
+    @auction = Auction.where(active: true).last
+    @sections = @auction.active_sections
+    gon.timers = @auction.create_js_time_array
     @user = current_user
   end
 

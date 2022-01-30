@@ -45,8 +45,38 @@ font-family: "Helvetica Neue", Helvetica, Arial, Sans-Serif !important;
 
 .item_object{
   .header{
-    color: $dark-blue;
+    color: $gray-blue;
     background: $sky-blue;
     padding: 5px 0;
   }
+  ul.cd_timer li p {
+    color: #ffffff !important;
+    font-size: 1rem;
+  }
+}
+
+ul.cd_timer {
+  list-style: none;
+  padding: 0;
+  display: block;
+  text-align: center;
+}
+
+ul.cd_timer li { display: inline-block; }
+
+ul.cd_timer li span {
+  font-size: 2rem;
+  font-weight: 300;
+  line-height: 1;
+}
+
+ul.cd_timer li.seperator {
+  font-size: 2rem;
+  line-height: 1;
+  vertical-align: top;
+}
+
+ul.cd_timer li p {
+  color: #a7abb1;
+  font-size: 1rem;
 }

@@ -16,14 +16,16 @@
     <!-- Links -->
     <ul class="navbar-nav mr-auto">
       <li class="nav-item">
-        <a class="nav-link text-center" href="#">Home</a>
+        <a class="nav-link text-center" href="/">Auctions</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link text-center" href="#">Features</a>
+        <a class="nav-link text-center" href="/my_items">My Items</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link text-center" href="#">Pricing</a>
-      </li>
+      <% if @user.has_role?(:admin) %>
+        <li class="nav-item">
+          <a class="nav-link text-center" href="/admin">Admin panel</a>
+        </li>
+      <% end %>
     </ul>
     <!-- Links -->
 

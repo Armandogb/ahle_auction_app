@@ -4,18 +4,16 @@
   <% @sections.each do |section| %>
     <div class="card">
       <div class="card-header" id="heading_<%= section.id %>">
-        <h3 class="mb-0">
-          <div class="btn btn-link" data-toggle="collapse" data-target="#collapse_<%= section.id %>" aria-expanded="true" aria-controls="collapse_<%= section.id %>">
-            <div class="row">
-              <div class="col-9">
-                <i class="fa fa-arrow-circle-down" aria-hidden="true"></i> <%= section.display_name %>
+
+        <div class="row" data-toggle="collapse" data-target="#collapse_<%= section.id %>" aria-expanded="true" aria-controls="collapse_<%= section.id %>">
+              <div class="col-md-6 mb-3 text-center">
+                <h4><i class="fa fa-arrow-circle-down" aria-hidden="true"></i> <%= section.display_name %></h4>
               </div>
-              <div class="col-3">
-                <%= section.end_time %>
+              <div class="col-md-6">
+                <%= render partial: "auctions/partials/timer_partial", locals: { section: section } %>
               </div>
             </div>
-          </div>
-        </h3>
+
       </div>
       <div id="collapse_<%= section.id %>" class="collapse collapsed" aria-labelledby="heading_<%= section.id %>" data-parent="#accordion">
         <div class="card-body">
