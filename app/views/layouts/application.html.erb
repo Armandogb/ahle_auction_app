@@ -23,11 +23,11 @@
 
   <%= render 'application/nav_bar_top.html.erb' %>
 
-  <div class="row main_section pl-3 pr-3">
-    <div role="main" class="col-12">
-      <%= yield %>
-    </div>
+  <div class="container" role="main">
+    <%= yield %>
   </div>
+
+
 </div>
 
 <%= javascript_include_tag 'application' %>

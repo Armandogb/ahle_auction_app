@@ -3,14 +3,14 @@
   <div class="col-12">
     <div class="row header mb-3">
       <div class="col-md-6 mb-3 text-center">
-        <h5><span id="item_bid_show_name"><%= item.name %></span></h5>
+        <h3><span id="item_bid_show_name"><%= item.name %></span></h3>
       </div>
       <div class="col-md-6">
         <%= render partial: "auctions/partials/timer_partial", locals: { section: section } %>
       </div>
     </div>
     <div class="row mb-3">
-      <div class="col-md-4 text-center">
+      <div class="col-md-4 mb-3 text-center">
         <img class="img-fluid" src="<%= item.photo.decent_size.url %>">
       </div>
       <div class="col-md-8">
@@ -18,7 +18,8 @@
       </div>
     </div>
     <div class="row mb-3">
-      <div class="col-md-6 text-left mb-3">
+      <div class="col-md-4 text-left mb-3">
+        <h4>
         <% if DateTime.now > section.end_time %>
          Winning Bid: $<span id="item_bid_show_<%= item.id %>"><%= bid_logic[:high_bid] %></span>
         <% else %>
@@ -28,8 +29,9 @@
             Current Highest Bid: $<span id="item_bid_show_<%= item.id %>"><%= bid_logic[:high_bid] %></span>
           <% end %>
         <% end %>
+        </h4>
       </div>
-      <div class="col-md-6">
+      <div class="col-md-8">
         <% unless DateTime.now > section.end_time %>
         <button type="button" id="bid_pop_<%= item.id %>" class="btn btn-block btn-success" data-toggle="modal" data-target="#bidModal_<%= item.id %>">
           Bid

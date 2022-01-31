@@ -36,10 +36,18 @@ font-family: "Helvetica Neue", Helvetica, Arial, Sans-Serif !important;
 
 
 .auctions{
-  //background: $light-gray;
+  &.index{
+    background: $light-gray;
+  }
+  &.my_items_index{
+    background: $light-gray;
+  }
   &.index{
     .main_section{
     }
+  }
+  .card-body{
+    background: $light-gray;
   }
 }
 
@@ -79,4 +87,12 @@ ul.cd_timer li.seperator {
 ul.cd_timer li p {
   color: #a7abb1;
   font-size: 1rem;
+}
+
+.nav-link{
+  border: 1px solid #ffffff;
+}
+
+.item_object{
+  background: #ffffff;
 }

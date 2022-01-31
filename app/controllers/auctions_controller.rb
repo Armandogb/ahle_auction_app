@@ -17,6 +17,16 @@ class AuctionsController < ApplicationController
     @items = Item.all
   end
 
+  def my_items_index
+    @items = @user.items.uniq
+    results = []
+    @items.each do |i|
+      results << i.create_js_time_array
+    end
+    gon.timers = results
+
+  end
+
   # GET /auctions/1 or /auctions/1.json
   def show
   end

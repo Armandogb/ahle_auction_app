@@ -22,4 +22,16 @@ class Item < ApplicationRecord
 
   end
 
+  def section_q
+    self.sections.first
+  end
+
+  def create_js_time_array
+    sects = self.section_q
+
+    results = [sects.id, sects.js_date_string]
+
+    return results
+  end
+
 end

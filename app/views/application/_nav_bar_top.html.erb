@@ -19,11 +19,11 @@
         <a class="nav-link text-center" href="/">Auctions</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link text-center" href="/my_items">My Items</a>
+        <a class="nav-link text-center" href="/my_items">My Bidded Items</a>
       </li>
       <% if @user.has_role?(:admin) %>
         <li class="nav-item">
-          <a class="nav-link text-center" href="/admin">Admin panel</a>
+          <a class="nav-link text-center" href="/admin">Admin Panel</a>
         </li>
       <% end %>
     </ul>

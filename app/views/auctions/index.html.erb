@@ -7,7 +7,7 @@
 
         <div class="row" data-toggle="collapse" data-target="#collapse_<%= section.id %>" aria-expanded="true" aria-controls="collapse_<%= section.id %>">
               <div class="col-md-6 mb-3 text-center">
-                <h4><i class="fa fa-arrow-circle-down" aria-hidden="true"></i> <%= section.display_name %></h4>
+                <h1><i class="fa fa-arrow-circle-down" aria-hidden="true"></i> <%= section.display_name %></h1>
               </div>
               <div class="col-md-6">
                 <%= render partial: "auctions/partials/timer_partial", locals: { section: section } %>

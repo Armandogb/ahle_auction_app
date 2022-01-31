@@ -18,4 +18,5 @@ class Auction < ApplicationRecord
     return results
   end
 
+
 end

@@ -2,9 +2,9 @@
   <div class="col-sm-12">
     <h2>
       <span>Auctions </span><span class="small"></span>
-      <small><%= link_to 'Create Auction', new_auction_path, class: 'btn btn-xs btn-success mb-1 ml-2' %></small>
+      <small><%= link_to 'Create Auction', new_auction_path, class: 'btn btn-sm btn-success mb-1 ml-2' %></small>
       <!--      <small>-->
-      <%#= link_to('Download Results', auctions_report_path, class: 'btn btn-xs btn-primary mb-1 ml-2', target: '_report') %>
+      <%#= link_to('Download Results', auctions_report_path, class: 'btn btn-sm btn-primary mb-1 ml-2', target: '_report') %>
       <!--      </small>-->
     </h2>
   </div>
@@ -30,12 +30,16 @@
 
           <tr>
             <td class="px-3"><%= auction.name %></td>
-            <td class="d-none d-md-table-cell px-3"><%= auction.name %></td>
+            <td class="d-none d-md-table-cell px-3">
+              <% auction.sections.order(end_time: :asc).each do |s| %>
+                <%= "#{s.title}<br>".html_safe %>
+              <% end %>
+            </td>
             <td class="px-3 d-md-table-cell"><%= auction.active.to_s.titleize %></td>
             <td class="px-3 d-md-table-cell text-center">
-              <%= link_to 'Edit', edit_auction_path(auction), class: "btn btn-xs btn-primary" %>
+              <%= link_to 'Edit', edit_auction_path(auction), class: "btn btn-sm btn-primary" %>
               <%= link_to 'Destroy', auction_path(auction), method: :delete,
-                          data: { confirm: 'Are you sure?' }, class: "btn btn-xs btn-primary" %>
+                          data: { confirm: 'Are you sure?' }, class: "btn btn-sm btn-primary" %>
             </td>
           </tr>
         <% end %>

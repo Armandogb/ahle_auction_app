@@ -1,0 +1,22 @@
+<!-- Flash Notice -->
+<% if flash[:notice] %>
+  <div class="form-row w-100 mt-3 mb-3">
+    <div class="col-12">
+      <div class="alert alert-success" role="alert">
+        <strong><%= raw flash[:notice] %></strong>
+      </div>
+    </div>
+  </div>
+<% end %>
+
+  <div class="row mt-3">
+    <div class="col-12">
+      <% @items.each do |item| %>
+        <%= render partial: "auctions/partials/auction_items", locals: { item: item, section: item.section_q } %>
+      <% end %>
+    </div>
+  </div>
+
+
+
+
