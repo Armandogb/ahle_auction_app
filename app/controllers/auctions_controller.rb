@@ -20,6 +20,7 @@ class AuctionsController < ApplicationController
   def my_items_index
     @items = @user.items.uniq
     results = []
+
     @items.each do |i|
       results << i.create_js_time_array
     end

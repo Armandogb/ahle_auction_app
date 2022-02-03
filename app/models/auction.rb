@@ -19,8 +19,10 @@ class Auction < ApplicationRecord
     sects = self.active_sections
     results = []
 
-    sects.each do |s|
-      results << [s.id, s.js_date_string]
+    unless sects.empty?
+      sects.each do |s|
+        results << [s.id, s.js_date_string]
+      end
     end
 
     return results
