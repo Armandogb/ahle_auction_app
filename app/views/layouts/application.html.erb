@@ -21,7 +21,9 @@
 
 <div class="container-fluid p-0">
 
-  <%= render 'application/nav_bar_top.html.erb' %>
+  <% if current_user.present? %>
+    <%= render 'application/nav_bar_top.html.erb' %>
+  <% end %>
 
   <div class="container" role="main">
     <%= yield %>

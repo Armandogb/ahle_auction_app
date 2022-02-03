@@ -4,11 +4,7 @@ class ApplicationController < ActionController::Base
   private
 
   def set_user
-    if current_user.present?
-      @user = current_user
-    else
-      @user = nil
-    end
+    @user = current_user
   end
 
   def admin_check

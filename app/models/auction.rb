@@ -7,7 +7,7 @@ class Auction < ApplicationRecord
     sects = self.sections
 
     if sects.empty?
-      sects = nil
+      sects = []
     else
       sects = sects.where(active: true).where("end_time > ?", DateTime.now ).order(end_time: :asc)
     end
