@@ -16,7 +16,7 @@
           </div>
         </div>
         <div id="modal_user_actions_<%= item.id %>">
-          <%= simple_form_for(:bid, data: { 'parsley-validate': '' }, url: root_path, html: { id: "bid_form_#{item.id}"} ) do |f| %>
+          <%= simple_form_for(:bid, data: { 'parsley-validate': '' }, url: '/#', html: { id: "bid_form_#{item.id}"} ) do |f| %>
             <div class="row">
               <div class="col-8">
                 <h5>Minimum Bid: $<span id="modal_min_bid_<%= item.id %>"><%= bid_logic[:valid_bid] %></span><br> ($<%= item.min_bid %> Increments)</h5>

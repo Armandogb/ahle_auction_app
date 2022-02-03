@@ -23,4 +23,5 @@ test:
 
 production:
   <<: *default
-  database: ahle_auction_production
+  url: <%= ENV['DATABASE_URL'] %>
+

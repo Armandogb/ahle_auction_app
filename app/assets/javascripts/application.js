@@ -39,6 +39,8 @@ $( document ).ready(function() {
         });
     });
 
+    // $("")
+
     $('.bid_submit_but').click(function() {
         let sub_but = $(this);
         let $item_id = $(this).attr('data-itemid');
