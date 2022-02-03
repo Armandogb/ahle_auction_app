@@ -4,7 +4,15 @@ class Auction < ApplicationRecord
   validates :name, uniqueness: true
 
   def active_sections
-    return self.sections.where(active: true).where("end_time > ?", DateTime.now ).order(end_time: :asc)
+    sects = self.sections
+
+    if sects.empty?
+      sects = nil
+    else
+      sects = sects.where(active: true).where("end_time > ?", DateTime.now ).order(end_time: :asc)
+    end
+
+    return sects
   end
 
   def create_js_time_array
@@ -16,6 +24,18 @@ class Auction < ApplicationRecord
     end
 
     return results
+  end
+
+  def self.active_auction
+    auction = Auction.where(active: true)
+
+    if auction.empty?
+      auction = Auction.new
+    else
+      auciton = auciton.last
+    end
+
+    return auction
   end
 
 
