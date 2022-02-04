@@ -34,4 +34,20 @@ class Item < ApplicationRecord
     return results
   end
 
+  def highest_bid
+    bid = self.bids
+
+    if bid.empty?
+      bid = []
+    else
+      bid = bid.order(value: :desc).first
+    end
+
+    return bid
+  end
+
+  def self.selectable_items
+
+  end
+
 end

@@ -19,7 +19,10 @@
 //= require countdown.js
 //= require_tree .
 
+$('.simple_form.bid').submit(false);
+
 $( document ).ready(function() {
+
 
     gon.timers.forEach(a => {
         let sect_id = a[0]

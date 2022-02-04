@@ -22,7 +22,8 @@
                 <h5>Minimum Bid: $<span id="modal_min_bid_<%= item.id %>"><%= bid_logic[:valid_bid] %></span><br> ($<%= item.min_bid %> Increments)</h5>
               </div>
               <div class="col-4">
-                <%= f.input :bid, required: true, input_html: { value: bid_logic[:valid_bid], id: "modal_bid_#{item.id}", type: 'number'}, label: false %>
+                <% bid_valid_data = { 'parsley-min': bid_logic[:valid_bid] } %>
+                <%= f.input :bid, required: true, input_html: { value: bid_logic[:valid_bid], id: "modal_bid_#{item.id}", type: 'number', data: bid_valid_data}, label: false %>
               </div>
             </div>
           <% end %>
