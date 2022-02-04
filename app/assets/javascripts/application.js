@@ -27,6 +27,7 @@ $( document ).ready(function() {
 
         $('.section_timer_'+sect_id).countdown({
             date: time,
+            offset: -6,
             day: 'Day',
             days: 'Days',
             hour: 'Hour',
@@ -35,11 +36,11 @@ $( document ).ready(function() {
             minutes: 'Minutes',
             second: 'Second',
             seconds: 'Seconds'
-        }, function () {
+        }, function (container) {
+            $("#section_card_"+sect_id).addClass('d-none');
         });
     });
 
-    // $("")
 
     $('.bid_submit_but').click(function() {
         let sub_but = $(this);

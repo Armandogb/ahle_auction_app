@@ -34,7 +34,7 @@ class Auction < ApplicationRecord
     if auction.empty?
       auction = Auction.new
     else
-      auciton = auciton.last
+      auction = auction.last
     end
 
     return auction
