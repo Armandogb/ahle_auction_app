@@ -49,7 +49,8 @@ $( document ).ready(function() {
         let sub_but = $(this);
         let $item_id = $(this).attr('data-itemid');
         let $user_id = $(this).attr('data-userid');
-        let $bid = $("#modal_bid_"+$item_id).val();
+        let $bid_field = $("#modal_bid_"+$item_id);
+        let $bid = $bid_field.val();
         let $form = $('#bid_form_'+$item_id);
 
         $("#modal_message_"+$item_id).addClass('d-none');
@@ -59,16 +60,17 @@ $( document ).ready(function() {
 
         if($form.parsley().isValid()){
 
-            if (confirm('Are you sure you would like to bid $'+$bid+'?')) {
+            if (confirm('Are you sure you would like to bid $'+parseInt($bid).toLocaleString()+'?')) {
 
                 $.get("/a/create_a_bid/"+$item_id+"/"+$user_id+"/"+$bid+".json", function(data, status){
 
                     switch(data.status) {
                         case 'ok':
                             $("#modal_bid_"+$item_id).val(data.valid_bid);
-                            $("#modal_min_bid_"+$item_id).html(data.valid_bid);
-                            $("#item_bid_show_"+$item_id).html(data.highest);
+                            $("#modal_min_bid_"+$item_id).html(data.valid_bid.toLocaleString());
+                            $("#item_bid_show_"+$item_id).html(data.highest.toLocaleString());
                             $("#modal_message_"+$item_id).addClass('alert-success');
+                            $bid_field.attr('data-parsley-min',data.valid_bid)
                             break;
                         case 'closed':
                             sub_but.addClass('d-none');
@@ -79,9 +81,10 @@ $( document ).ready(function() {
                             break;
                         case 'outbid':
                             $("#modal_bid_"+$item_id).val(data.valid_bid);
-                            $("#modal_min_bid_"+$item_id).html(data.valid_bid);
-                            $("#item_bid_show_"+$item_id).html(data.highest);
+                            $("#modal_min_bid_"+$item_id).html(data.valid_bid.toLocaleString());
+                            $("#item_bid_show_"+$item_id).html(data.highest.toLocaleString());
                             $("#modal_message_"+$item_id).addClass('alert-danger');
+                            $bid_field.attr('data-parsley-min',data.valid_bid)
                             break;
                         default:
                         // code block

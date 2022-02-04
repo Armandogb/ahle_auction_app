@@ -19,7 +19,7 @@
           <%= simple_form_for(:bid, data: { 'parsley-validate': '' }, url: '/#', html: { id: "bid_form_#{item.id}"} ) do |f| %>
             <div class="row">
               <div class="col-8">
-                <h5>Minimum Bid: $<span id="modal_min_bid_<%= item.id %>"><%= bid_logic[:valid_bid] %></span><br> ($<%= item.min_bid %> Increments)</h5>
+                <h5>Minimum Bid: $<span id="modal_min_bid_<%= item.id %>"><%= number_with_delimiter(bid_logic[:valid_bid], :delimiter => ',') %></span><br> ($<%= item.min_bid %> Increments)</h5>
               </div>
               <div class="col-4">
                 <% bid_valid_data = { 'parsley-min': bid_logic[:valid_bid] } %>

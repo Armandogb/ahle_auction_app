@@ -21,12 +21,12 @@
       <div class="col-md-4 text-left mb-3">
         <h4>
         <% if DateTime.now > section.end_time %>
-         Winning Bid: $<span id="item_bid_show_<%= item.id %>"><%= bid_logic[:high_bid] %></span>
+         Winning Bid: $<span id="item_bid_show_<%= item.id %>"><%= number_with_delimiter(bid_logic[:high_bid], :delimiter => ',') %></span>
         <% else %>
           <% if bid_logic[:high_bid] == 0 %>
-            Starting Bid: $<span id="item_bid_show_<%= item.id %>"><%= bid_logic[:valid_bid] %></span>
+            Starting Bid: $<span id="item_bid_show_<%= item.id %>"><%= number_with_delimiter(bid_logic[:valid_bid], :delimiter => ',') %></span>
           <% else %>
-            Current Highest Bid: $<span id="item_bid_show_<%= item.id %>"><%= bid_logic[:high_bid] %></span>
+            Current Highest Bid: $<span id="item_bid_show_<%= item.id %>"><%= number_with_delimiter(bid_logic[:high_bid], :delimiter => ',') %></span>
           <% end %>
         <% end %>
         </h4>

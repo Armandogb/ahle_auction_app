@@ -23,7 +23,7 @@ class BidsController < ApplicationController
         result[:highest] = bid
       else
         result[:status] = 'outbid'
-        result[:message] = "You need to raise your bid to $#{bid_logic[:valid_bid]}."
+        result[:message] = "You have been outbid, raise your bid to $#{bid_logic[:valid_bid]}."
         result[:valid_bid] = bid_logic[:valid_bid]
         result[:highest] = bid_logic[:high_bid]
       end

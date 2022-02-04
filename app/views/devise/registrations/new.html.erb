@@ -13,9 +13,13 @@
 <% form_options = {data: { 'parsley-validate': '' } } %>
 <% form_options[:html] = { method: :put } if is_edit %>
 
+<div class="row">
+  <div class="col-12">
+    <h1>Create Account</h1>
+  </div>
+</div>
 
-
-<%= simple_form_for(@user, form_options) do |f| %>
+<%= simple_form_for(resource, as: resource_name, data: { 'parsley-validate': '' }, url: registration_path(resource_name)) do |f| %>
   <% pwd_minlength = 6 %>
 
   <%= f.error_notification %>
@@ -23,10 +27,13 @@
   <div class="form-inputs my-3">  <%# START: FORM-INPUTS %>
 
     <div class="form-row">
-      <div class="col-sm-12">
-        <% first_name_data = { 'parsley-maxlength': 200 } %>
-        <%= f.input :name, label: 'Name on Card', autofocus: params[:action] == 'new',
-                    maxlength: 50, input_html: { autocomplete: "first_name", data: first_name_data } %>
+      <div class="col-6">
+        <%= f.input :first_name, label: 'First Name', required: true, autofocus: params[:action] == 'new',
+                    maxlength: 50, input_html: { autocomplete: "first_name" } %>
+      </div>
+      <div class="col-6">
+        <%= f.input :last_name, label: 'Last Name', required: true, autofocus: params[:action] == 'new',
+                    maxlength: 50, input_html: { autocomplete: "first_name" } %>
       </div>
     </div>
 
@@ -48,7 +55,7 @@
 
 
     <div class="form-row">
-      <div class="col-sm-6">
+      <div class="col-6">
         <% password_data = { 'parsley-maxlength': 50, 'parsley-minlength': pwd_minlength } %>
         <%= f.input :password, required: !is_edit do %>
           <%= f.input_field :password, maxlength: 50, minlength: pwd_minlength, required: !is_edit,
@@ -66,7 +73,7 @@
           <% end %>
         <% end %>
       </div>
-      <div class="col-sm-6">
+      <div class="col-6">
         <% password_confirmation_data = { 'parsley-equalto': '#user_password', 'parsley-maxlength': 50,
                                           'parsley-minlength': pwd_minlength } %>
         <%= f.input :password_confirmation, label: 'Password Confirmation', required: !is_edit,
@@ -74,6 +81,16 @@
                     input_html: { autocomplete: "new-password",
                                   data: password_confirmation_data,
                                   oninput: "this.value = this.value.slice(0, this.maxLength);" } %>
+      </div>
+    </div>
+
+
+    <div class="form-row">
+      <div class="col-8">
+          <%= f.input :phone, maxlength: 10  %>
+      </div>
+      <div class="col-4">
+        <%= f.input :sign_up_code %>
       </div>
     </div>
 

@@ -7,33 +7,26 @@ class User < ApplicationRecord
 
   has_many :bids
   has_many :items, through: :bids
-  attr_accessor :email_confirmation
+  attr_accessor :email_confirmation, :sign_up_code
 
-  before_save :encrpyt_fields
+  before_validation :check_sign_up_code
 
-  def decrpyt_fields
-    create_crypt
-
-    self.cn =  @crypt.decrypt_and_verify(self.cn) unless self.cn.nil?
-    self.cm =  @crypt.decrypt_and_verify(self.cm) unless self.cm.nil?
-    self.cy =  @crypt.decrypt_and_verify(self.cy) unless self.cy.nil?
-    self.cp =  @crypt.decrypt_and_verify(self.cp) unless self.cp.nil?
-    self.cz =  @crypt.decrypt_and_verify(self.cz) unless self.cz.nil?
-    self.ct =  @crypt.decrypt_and_verify(self.ct) unless self.ct.nil?
-  end
 
   private
 
-  def encrpyt_fields
-    create_crypt
+  def check_sign_up_code
 
-    self.cn =  @crypt.encrypt_and_sign(self.cn) unless self.cn.nil?
-    self.cm =  @crypt.encrypt_and_sign(self.cm) unless self.cm.nil?
-    self.cy =  @crypt.encrypt_and_sign(self.cy) unless self.cy.nil?
-    self.cp =  @crypt.encrypt_and_sign(self.cp) unless self.cp.nil?
-    self.cz =  @crypt.encrypt_and_sign(self.cz) unless self.cz.nil?
-    self.ct =  @crypt.encrypt_and_sign(self.ct) unless self.ct.nil?
+    case self.sign_up_code
+    when ENV["SU_NORMAL"].to_s, ENV["SU_ADMIN"].to_s
+      if self.sign_up_code == ENV["SU_ADMIN"].to_s
+        @set_admin = true
+      else
+        @set_admin = false
+      end
+    else
+      errors.add(:sign_up_code,
+                 "Invalid.")
+    end
   end
-
 
 end
