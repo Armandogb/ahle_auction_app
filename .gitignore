@@ -18,6 +18,7 @@
 /public/theme_images
 /public/generated_reports
 /public/uploads
+/public/item
 /public/UploadedAssets/*
 /public/packs-test
 /node_modules
@@ -29,6 +30,3 @@ yarn-debug.log*
 /.idea
 # Ignore application configuration
 /config/application.yml
-armando_boarding_pass
-decent_size_armando_boarding_pass
-thumb_armando_boarding_pass

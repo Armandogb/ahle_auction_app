@@ -9,7 +9,7 @@ class ApplicationController < ActionController::Base
   end
 
   def admin_check
-    redirect_to root_path, alert: 'Action not permitted.' unless user_has_admin_role?
+    redirect_to root_path, alert: 'Action not permitted.' unless  current_user.present? && current_user.has_role?(:admin)
   end
 
   def configure_permitted_parameters

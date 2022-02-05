@@ -7,14 +7,17 @@ class Item < ApplicationRecord
     bids = self.bids
     results = {
         high_bid: 0,
-        valid_bid: 0
+        valid_bid: 0,
+        high_bid_object: nil
     }
 
     if bids.empty?
       start_bid = self.min_bid + self.starting_bid
       results[:valid_bid] = start_bid
     else
-      results[:high_bid] = bids.order(value: :desc).first.value
+      hb = self.highest_bid
+      results[:high_bid_object] = hb.id
+      results[:high_bid] = hb.value
       results[:valid_bid] = results[:high_bid] + self.min_bid
     end
 

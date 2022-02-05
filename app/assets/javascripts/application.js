@@ -17,11 +17,14 @@
 //= require bootstrap-sprockets
 //= require parsley
 //= require countdown.js
+//= require datatables.js
 //= require_tree .
 
 $('.simple_form.bid').submit(false);
 
 $( document ).ready(function() {
+
+    $('#auction_data, #section_data, #item_data').DataTable();
 
 
     gon.timers.forEach(a => {

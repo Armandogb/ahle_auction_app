@@ -10,6 +10,37 @@ class User < ApplicationRecord
   attr_accessor :email_confirmation, :sign_up_code
 
   before_validation :check_sign_up_code
+  after_create :final_steps
+
+
+  def send_text_message(message,entity)
+
+    account_sid = ENV["TWL_SID"]
+    auth_token = ENV["TWL_AUTH"]
+    from_number = ENV["TWL_NUM"]
+    bidded_auctions = ENV["MY_BID_URL"]
+
+    case message
+    when 'welcome'
+      msg = "Welcome to the AHLE Auction! You will recieve text updates on the items you bid on.".squish
+    when 'outbid'
+      msg = "You have been outbid on #{entity.name}! Click #{bidded_auctions} to view your bidded on items to rebid!".squish
+    end
+
+    to_phone = self.phone
+
+    rest_client = Twilio::REST::Client.new account_sid, auth_token
+
+      begin
+        response = rest_client.messages.create(from: from_number, to: '+1' + to_phone, body: msg)
+
+      rescue Twilio::REST::RestError => e
+        message = e.message
+
+        puts "#{message}"
+      end
+
+  end
 
 
   private
@@ -27,6 +58,14 @@ class User < ApplicationRecord
       errors.add(:sign_up_code,
                  "Invalid.")
     end
+  end
+
+  def final_steps
+    if @set_admin
+      self.add_role(:admin)
+    end
+
+    self.send_text_message('welcome', nil)
   end
 
 end

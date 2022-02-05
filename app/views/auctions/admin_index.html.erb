@@ -1,3 +1,5 @@
+
+
 <!-- Flash Notice -->
 <% if flash[:notice] %>
   <div class="form-row w-100 mt-3 mb-3">
@@ -9,11 +11,13 @@
   </div>
 <% end %>
 
-<div class="row">
+<div class="row pb-5">
   <div class="col-12">
     <section class="program-list mt-3">
     <%= render 'auctions/partials/auction_table' %>
+      <div class="mtb-3"><hr></div>
     <%= render 'auctions/partials/sections_table' %>
+      <div class="mtb-3"><hr></div>
     <%= render 'auctions/partials/items_table' %>
     </section>
   </div>

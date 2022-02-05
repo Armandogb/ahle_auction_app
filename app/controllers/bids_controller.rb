@@ -1,5 +1,6 @@
 class BidsController < ApplicationController
   before_action :authenticate_user!
+  before_action :admin_check, except: %i[ ajax_create_bid ]
 
   def ajax_create_bid
     @item = Item.find(params[:item_id])
@@ -16,6 +17,16 @@ class BidsController < ApplicationController
       bid_logic = @item.bid_values
 
       if bid >= bid_logic[:valid_bid].to_i
+        out_bidded = bid_logic[:high_bid_object]
+
+        unless out_bidded.nil?
+          out_bidded = Bid.find(bid_logic[:high_bid_object])
+          o_user = out_bidded.user
+          unless out_bidded.user == @user
+            o_user.send_text_message('outbid', @item)
+          end
+        end
+
         @bid = Bid.create(user_id: @user.id, item_id: @item.id, value: bid)
         result[:status] = 'ok'
         result[:message] = "Your bid is the highest bid!"
