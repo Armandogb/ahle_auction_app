@@ -29,3 +29,6 @@ yarn-debug.log*
 /.idea
 # Ignore application configuration
 /config/application.yml
+armando_boarding_pass
+decent_size_armando_boarding_pass
+thumb_armando_boarding_pass

@@ -74,6 +74,8 @@ gem "parsley-rails"
 gem 'simple_form'
 gem 'font-awesome-rails'
 gem 'gon'
+gem "fog"
+gem "fog-aws"
 gem 'carrierwave', '~> 2.0'
 gem 'twilio-ruby'
 gem 'jquery-datatables'
