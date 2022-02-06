@@ -42,9 +42,9 @@
   <div class="row my-3">
     <div class="col-12">
       <% if @item.persisted? %>
-        <%= f.submit 'Update Item Details', class:"btn btn-success btn-md" %>
+        <%= f.submit 'Update Item Details', class:"btn btn-success btn-md load_spinner" %>
       <% else %>
-        <%= f.submit 'Create Item', class:"btn btn-success btn-md" %>
+        <%= f.submit 'Create Item', class:"btn btn-success btn-md load_spinner" %>
       <% end %>
       <%= link_to('Cancel', admin_index_path, class: "btn btn-secondary btn-md") %>
     </div>

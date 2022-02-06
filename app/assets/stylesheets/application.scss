@@ -96,3 +96,19 @@ ul.cd_timer li p {
 .item_object{
   background: #ffffff;
 }
+
+#loading_modal{
+  width: 100vw;
+  height: 100vh;
+  background: #000000;
+  z-index: 10000;
+  position: absolute;
+  top: 0;
+  opacity: 50%;
+  .fa-spinner{
+    font-size: 30vh;
+    position: absolute;
+    top: 15%;
+    left: 25%;
+  }
+}
