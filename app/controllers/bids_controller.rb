@@ -14,28 +14,31 @@ class BidsController < ApplicationController
       result[:status] = 'closed'
       result[:message] = "Bidding on this Item has ended."
     else
-      bid_logic = @item.bid_values
+      @item.with_lock do
+        @item.save!
+        bid_logic = @item.bid_values
 
-      if bid >= bid_logic[:valid_bid].to_i
-        out_bidded = bid_logic[:high_bid_object]
-        @bid = Bid.create(user_id: @user.id, item_id: @item.id, value: bid)
+        if bid >= bid_logic[:valid_bid].to_i
+          out_bidded = bid_logic[:high_bid_object]
+          @bid = Bid.create(user_id: @user.id, item_id: @item.id, value: bid)
 
-        unless out_bidded.nil?
-          out_bidded = Bid.find(bid_logic[:high_bid_object])
-          o_user = out_bidded.user
-          unless out_bidded.user == @user
-            o_user.send_text_message('outbid', @item)
+          unless out_bidded.nil?
+            out_bidded = Bid.find(bid_logic[:high_bid_object])
+            o_user = out_bidded.user
+            unless out_bidded.user == @user
+              o_user.send_text_message('outbid', @item)
+            end
           end
+          result[:status] = 'ok'
+          result[:message] = "Your bid is the highest bid!"
+          result[:valid_bid] = bid + @item.min_bid
+          result[:highest] = bid
+        else
+          result[:status] = 'outbid'
+          result[:message] = "You have been outbid, raise your bid to $#{bid_logic[:valid_bid]}."
+          result[:valid_bid] = bid_logic[:valid_bid]
+          result[:highest] = bid_logic[:high_bid]
         end
-        result[:status] = 'ok'
-        result[:message] = "Your bid is the highest bid!"
-        result[:valid_bid] = bid + @item.min_bid
-        result[:highest] = bid
-      else
-        result[:status] = 'outbid'
-        result[:message] = "You have been outbid, raise your bid to $#{bid_logic[:valid_bid]}."
-        result[:valid_bid] = bid_logic[:valid_bid]
-        result[:highest] = bid_logic[:high_bid]
       end
     end
 
