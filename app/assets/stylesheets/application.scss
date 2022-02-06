@@ -102,15 +102,19 @@ ul.cd_timer li p {
   height: 100vh;
   background: #000000;
   z-index: 10000;
-  position: absolute;
+  position: fixed;
   top: 0;
   opacity: 50%;
   .fa-spinner{
-    font-size: 30vh;
-    position: absolute;
-    top: 15%;
-    left: 25%;
+    font-size: 20vw;
+    position: fixed;
+    left: 40vw;
+    top: 30vh;
   }
+}
+
+.second_nav_row{
+  background: $water-blue;
 }
 
 .second_nav{

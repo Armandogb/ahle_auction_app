@@ -19,7 +19,7 @@
         <a class="nav-link text-center" href="/">Auctions</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link text-center" href="/my_items">My Bidded Items</a>
+        <a class="nav-link text-center" href="/my_items">My Items</a>
       </li>
       <% if @user.has_role?(:admin) %>
         <li class="nav-item">
@@ -35,20 +35,22 @@
 </nav>
 <!--/.Navbar-->
 
-<div class="row">
-  <div class='col-12'>
-    <ul class="second_nav ">
-      <li class="mr-4" id="nav_auctions">
-        <a href="/">Auctions</a>
-      </li>
-      <li class="mr-4" id="nav_items">
-        <a href="/my_items" >My Bidded Items</a>
-      </li>
-      <% if @user.has_role?(:admin) %>
-        <li id="nav_admin">
-          <a href="/admin" >Admin Panel</a>
+  <div class="row mr-0 second_nav_row">
+    <div class='col-12'>
+      <ul class="second_nav mr-0">
+        <li class="mr-3" id="nav_auctions">
+          <a href="/">Auctions</a>
         </li>
-      <% end %>
-    </ul>
-  </div class='col-12'>
-</div>
+        <li class="mr-3" id="nav_items">
+          <a href="/my_items" >My Items</a>
+        </li>
+        <% if @user.has_role?(:admin) %>
+          <li id="nav_admin">
+            <a href="/admin" >Admin</a>
+          </li>
+        <% end %>
+      </ul>
+    </div class='col-12'>
+  </div>
+
+

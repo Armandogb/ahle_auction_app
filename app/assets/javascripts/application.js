@@ -80,6 +80,8 @@ $( document ).ready(function() {
             if (confirm('Are you sure you would like to bid $'+parseInt($bid).toLocaleString()+'?')) {
 
                 $.get("/a/create_a_bid/"+$item_id+"/"+$user_id+"/"+$bid+".json", function(data, status){
+                    $("#loading_modal").removeClass('d-none');
+
                     switch(data.status) {
                         case 'ok':
                             $("#modal_bid_"+$item_id).val(data.valid_bid);
@@ -87,7 +89,6 @@ $( document ).ready(function() {
                             $("#item_bid_show_"+$item_id).html(data.highest.toLocaleString());
                             $("#modal_message_"+$item_id).addClass('alert-success');
                             $bid_field.attr('data-parsley-min',data.valid_bid);
-                            $("#loading_modal").addClass('d-none');
                             break;
                         case 'closed':
                             sub_but.addClass('d-none');
@@ -95,7 +96,6 @@ $( document ).ready(function() {
                             $("#modal_bid_"+$item_id).addClass('d-none');
                             $("#bid_pop_"+$item_id).addClass('d-none');
                             $("#modal_message_"+$item_id).addClass('alert-danger');
-                            $("#loading_modal").addClass('d-none');
                             break;
                         case 'outbid':
                             $("#modal_bid_"+$item_id).val(data.valid_bid);
@@ -103,7 +103,6 @@ $( document ).ready(function() {
                             $("#item_bid_show_"+$item_id).html(data.highest.toLocaleString());
                             $("#modal_message_"+$item_id).addClass('alert-danger');
                             $bid_field.attr('data-parsley-min',data.valid_bid);
-                            $("#loading_modal").addClass('d-none');
                             break;
                         default:
                         // code block
@@ -111,6 +110,7 @@ $( document ).ready(function() {
 
                     $("#modal_message_"+$item_id).removeClass('d-none');
                     $("#modal_message_"+$item_id).html(data.message);
+                    $("#loading_modal").addClass('d-none');
 
                 });
             };
