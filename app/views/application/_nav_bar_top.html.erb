@@ -34,3 +34,21 @@
 
 </nav>
 <!--/.Navbar-->
+
+<div class="row">
+  <div class='col-12'>
+    <ul class="second_nav ">
+      <li class="mr-4" id="nav_auctions">
+        <a href="/">Auctions</a>
+      </li>
+      <li class="mr-4" id="nav_items">
+        <a href="/my_items" >My Bidded Items</a>
+      </li>
+      <% if @user.has_role?(:admin) %>
+        <li id="nav_admin">
+          <a href="/admin" >Admin Panel</a>
+        </li>
+      <% end %>
+    </ul>
+  </div class='col-12'>
+</div>

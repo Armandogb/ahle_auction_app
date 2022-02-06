@@ -47,7 +47,7 @@
       <% else %>
         <div class="col-sm-6">
           <% email_confirmation_data = { 'parsley-equalto': '#user_email', 'parsley-maxlength': 100 } %>
-          <%= f.input :email_confirmation, label: 'Email Confirmation', maxlength: 100,
+          <%= f.input :email_confirmation, label: 'Confirm Email', maxlength: 100,
                       required: !is_edit, input_html: { autocomplete: "email_confirmation", data: email_confirmation_data } %>
         </div>
       <% end %>
@@ -76,7 +76,7 @@
       <div class="col-6">
         <% password_confirmation_data = { 'parsley-equalto': '#user_password', 'parsley-maxlength': 50,
                                           'parsley-minlength': pwd_minlength } %>
-        <%= f.input :password_confirmation, label: 'Password Confirmation', required: !is_edit,
+        <%= f.input :password_confirmation, label: 'Confirm Password', required: !is_edit,
                     maxlength: 50, minlength: pwd_minlength,
                     input_html: { autocomplete: "new-password",
                                   data: password_confirmation_data,

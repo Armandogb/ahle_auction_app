@@ -112,3 +112,25 @@ ul.cd_timer li p {
     left: 25%;
   }
 }
+
+.second_nav{
+  background: $water-blue;
+  li{
+    padding: 1rem 0;
+    display: inline-block;
+    &.active{
+      background: $sky-blue;
+      a{
+        font-size: 18px;
+      }
+    }
+    a{
+      color: #ffffff;
+      font-size: 15px;
+      padding: 0 5px;
+    }
+    a:hover{
+      text-decoration: none;
+    }
+  }
+}

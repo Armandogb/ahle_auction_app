@@ -23,6 +23,16 @@
 
 $( document ).ready(function() {
 
+
+    if (window.location.href.indexOf("/admin") > -1) {
+        $('#nav_admin').addClass('active');
+    }else if (window.location.href.indexOf("/my_items") > -1){
+        $('#nav_items').addClass('active');
+    }else{
+        $('#nav_auctions').addClass('active');
+    };
+
+
     $('.simple_form.bid').submit(false);
 
     $('#auction_data, #section_data, #item_data').DataTable();
