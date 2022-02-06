@@ -18,6 +18,7 @@ class BidsController < ApplicationController
 
       if bid >= bid_logic[:valid_bid].to_i
         out_bidded = bid_logic[:high_bid_object]
+        @bid = Bid.create(user_id: @user.id, item_id: @item.id, value: bid)
 
         unless out_bidded.nil?
           out_bidded = Bid.find(bid_logic[:high_bid_object])
@@ -26,8 +27,6 @@ class BidsController < ApplicationController
             o_user.send_text_message('outbid', @item)
           end
         end
-
-        @bid = Bid.create(user_id: @user.id, item_id: @item.id, value: bid)
         result[:status] = 'ok'
         result[:message] = "Your bid is the highest bid!"
         result[:valid_bid] = bid + @item.min_bid

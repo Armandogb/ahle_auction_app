@@ -33,7 +33,7 @@
       </div>
       <div class="col-6">
         <%= f.input :last_name, label: 'Last Name', required: true, autofocus: params[:action] == 'new',
-                    maxlength: 50, input_html: { autocomplete: "first_name" } %>
+                    maxlength: 50, input_html: { autocomplete: "last_name" } %>
       </div>
     </div>
 
@@ -87,7 +87,7 @@
 
     <div class="form-row">
       <div class="col-8">
-          <%= f.input :phone, maxlength: 10  %>
+          <%= f.input :phone, maxlength: 10, input_html: { autocomplete: "phone" }  %>
       </div>
       <div class="col-4">
         <%= f.input :sign_up_code %>
