@@ -86,11 +86,11 @@
 
 
     <div class="form-row">
-      <div class="col-8">
-          <%= f.input :phone, maxlength: 10, input_html: { autocomplete: "phone" }  %>
+      <div class="col-md-6">
+          <%= f.input :phone, required: true, maxlength: 10, input_html: { autocomplete: "phone" }  %>
       </div>
-      <div class="col-4">
-        <%= f.input :sign_up_code %>
+      <div class="col-md-6">
+        <%= f.input :sign_up_code, label: "Sign Up Code (Optional)" %>
       </div>
     </div>
 

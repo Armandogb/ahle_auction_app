@@ -1,0 +1,43 @@
+<!-- The Modal -->
+<div class="modal" id="winner_modal_<%= section.id %>">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title"><%= section.display_name %> Winners</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body admin_data_modal">
+        <table class="table table-striped">
+          <thead>
+          <tr>
+            <th>Winning Bid</th>
+          </tr>
+          </thead>
+          <tbody>
+          <% items.order(:name).each do |item| %>
+            <% high_bid = item.highest_bid %>
+            <tr>
+              <% if high_bid.present? %>
+                <td class=""><%= item.highest_bid.bid_label %></td>
+              <% else %>
+                <td class=""><%= "#{item.name} - No Bids" %></td>
+              <% end %>
+            </tr>
+          <% end %>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+</div>

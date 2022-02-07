@@ -35,20 +35,26 @@
 
         <tbody>
         <% @sections.each do |section| %>
-
+          <% itms = section.items %>
           <tr>
             <td class="px-3"><%= section.title %></td>
             <td class="d-none d-md-table-cell px-3">
-              <% section.items.each do |i| %>
+              <% itms.each do |i| %>
               <%= "#{i.name}<br>".html_safe %>
               <% end %>
             </td>
             <td class="d-none d-md-table-cell px-3"><%= section.view_date_string %></td>
             <td class="px-3 d-md-table-cell"><%= section.active.to_s.titleize %></td>
             <td class="px-3 d-md-table-cell text-center">
+              <% if section.time_expired?  %>
+                <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#winner_modal_<%= section.id %>">
+                  Winners
+                </button>
+              <% end %>
               <%= link_to 'Edit', edit_section_path(section), class: "btn btn-sm btn-primary" %>
-              <%= link_to 'Destroy', section_path(section), method: :delete,
+              <%= link_to 'Delete', section_path(section), method: :delete,
                           data: { confirm: 'Are you sure?' }, class: "btn btn-sm btn-danger" %>
+              <%= render partial: "auctions/partials/winners_modal", locals: { section: section, items: itms } %>
             </td>
           </tr>
         <% end %>

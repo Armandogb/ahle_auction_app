@@ -38,7 +38,7 @@
             <td class="px-3 d-md-table-cell"><%= auction.active.to_s.titleize %></td>
             <td class="px-3 d-md-table-cell text-center">
               <%= link_to 'Edit', edit_auction_path(auction), class: "btn btn-sm btn-primary" %>
-              <%= link_to 'Destroy', auction_path(auction), method: :delete,
+              <%= link_to 'Delete', auction_path(auction), method: :delete,
                           data: { confirm: 'Are you sure?' }, class: "btn btn-sm btn-danger" %>
             </td>
           </tr>

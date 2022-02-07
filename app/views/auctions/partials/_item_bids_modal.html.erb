@@ -1,0 +1,42 @@
+<!-- The Modal -->
+<div class="modal" id="item_bids_modal_<%= item.id %>">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title"><%= item.name %> Bids</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body admin_data_modal">
+        <table class="table table-striped">
+          <thead>
+          <tr>
+            <th>Bid</th>
+            <th>Action</th>
+          </tr>
+          </thead>
+          <tbody>
+
+          <% item.bids.order(value: :desc).each do |bid| %>
+            <tr>
+              <td class=""><%= bid.bid_label %></td>
+              <td class=""><%= link_to 'Delete', bid_path(bid), method: :delete,
+                                       data: { confirm: 'Are you sure?' }, class: "btn btn-sm btn-danger" %></td>
+            </tr>
+          <% end %>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+</div>

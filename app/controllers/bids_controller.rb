@@ -21,12 +21,14 @@ class BidsController < ApplicationController
         if bid >= bid_logic[:valid_bid].to_i
           out_bidded = bid_logic[:high_bid_object]
           @bid = Bid.create(user_id: @user.id, item_id: @item.id, value: bid)
+          high_bid = { bid: @bid.dollar_value, item_name: @item.name }
 
+          @user.send_text_message('high_bid', high_bid)
           unless out_bidded.nil?
             out_bidded = Bid.find(bid_logic[:high_bid_object])
             o_user = out_bidded.user
             unless out_bidded.user == @user
-              o_user.send_text_message('outbid', @item)
+              o_user.send_text_message('outbid', high_bid)
             end
           end
           result[:status] = 'ok'
@@ -51,6 +53,14 @@ class BidsController < ApplicationController
       }
 
     end
+
+  end
+
+  def destroy
+    @bid = Bid.find(params[:id])
+    @bid.delete
+
+    redirect_to admin_index_path, notice: "Bid was successfully destroyed."
 
   end
 

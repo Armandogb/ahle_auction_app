@@ -43,6 +43,7 @@ class ItemsController < ApplicationController
 
   # DELETE /items/1 or /items/1.json
   def destroy
+    @item.bids.delete_all unless @item.bids.empty?
     @item.destroy
 
      redirect_to admin_index_path, notice: "Item was successfully destroyed."

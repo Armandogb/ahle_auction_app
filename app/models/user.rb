@@ -24,7 +24,9 @@ class User < ApplicationRecord
     when 'welcome'
       msg = "Welcome to the AHLE Auction! You will recieve text updates on the items you bid on.".squish
     when 'outbid'
-      msg = "You have been outbid on #{entity.name}! Click #{bidded_auctions} to view your bidded on items to rebid!".squish
+      msg = "You've been outbid! They bid #{entity[:bid]} on #{entity[:item_name]}! Click #{bidded_auctions} to view your bidded on items to rebid!".squish
+    when 'high_bid'
+      msg = "You are the highest bidder on #{entity[:item_name]} with a #{entity[:bid]} bid!".squish
     end
 
     to_phone = self.phone
@@ -48,15 +50,10 @@ class User < ApplicationRecord
   def check_sign_up_code
 
     case self.sign_up_code
-    when ENV["SU_NORMAL"].to_s, ENV["SU_ADMIN"].to_s
-      if self.sign_up_code == ENV["SU_ADMIN"].to_s
+      when ENV["SU_ADMIN"].to_s
         @set_admin = true
       else
         @set_admin = false
-      end
-    else
-      errors.add(:sign_up_code,
-                 "Invalid.")
     end
   end
 
