@@ -47,13 +47,13 @@
             <td class="px-3 d-md-table-cell"><%= section.active.to_s.titleize %></td>
             <td class="px-3 d-md-table-cell text-center">
               <% if section.time_expired?  %>
-                <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#winner_modal_<%= section.id %>">
+                <button type="button" class="btn btn-success btn-sm mb-1" data-toggle="modal" data-target="#winner_modal_<%= section.id %>">
                   Winners
                 </button>
               <% end %>
-              <%= link_to 'Edit', edit_section_path(section), class: "btn btn-sm btn-primary" %>
+              <%= link_to 'Edit', edit_section_path(section), class: "btn btn-sm btn-primary mb-1" %>
               <%= link_to 'Delete', section_path(section), method: :delete,
-                          data: { confirm: 'Are you sure?' }, class: "btn btn-sm btn-danger" %>
+                          data: { confirm: 'Are you sure?' }, class: "btn btn-sm btn-danger mb-1" %>
               <%= render partial: "auctions/partials/winners_modal", locals: { section: section, items: itms } %>
             </td>
           </tr>

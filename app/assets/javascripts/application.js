@@ -41,6 +41,16 @@ $( document ).ready(function() {
         $("#loading_modal").removeClass('d-none');
     });
 
+    $('.bid_modal_click').click(function() {
+        let $item_id = $(this).attr('data-itemid');
+        $("#modal_message_"+$item_id).removeClass('alert-success');
+        $("#modal_message_"+$item_id).removeClass('alert-danger');
+        $("#modal_message_"+$item_id).removeClass('alert-warning');
+        $("#modal_message_"+$item_id).empty();
+    });
+
+
+
     gon.timers.forEach(a => {
         let sect_id = a[0]
         let time = a[1]
@@ -58,6 +68,7 @@ $( document ).ready(function() {
             seconds: 'Seconds'
         }, function (container) {
             $("#section_card_"+sect_id).addClass('d-none');
+            $("#modal_message_"+$item_id).addClass('alert-success');
         });
     });
 
@@ -88,6 +99,11 @@ $( document ).ready(function() {
                             $("#modal_min_bid_"+$item_id).html(data.valid_bid.toLocaleString());
                             $("#item_bid_show_"+$item_id).html(data.highest.toLocaleString());
                             $("#modal_message_"+$item_id).addClass('alert-success');
+                            $(".bidder_block_"+$item_id).html(data.bidder+' - ');
+                            $(".bid_type_"+$item_id).html('Winning');
+                            $(".winning_bid_block."+$item_id).removeClass("alert-warning");
+                            $(".winning_bid_block."+$item_id).removeClass("alert-danger");
+                            $(".winning_bid_block."+$item_id).addClass("alert-success");
                             $bid_field.attr('data-parsley-min',data.valid_bid);
                             break;
                         case 'closed':
@@ -101,7 +117,10 @@ $( document ).ready(function() {
                             $("#modal_bid_"+$item_id).val(data.valid_bid);
                             $("#modal_min_bid_"+$item_id).html(data.valid_bid.toLocaleString());
                             $("#item_bid_show_"+$item_id).html(data.highest.toLocaleString());
+                            $(".winning_bid_block."+$item_id).removeClass("alert-warning");
+                            $(".winning_bid_block."+$item_id).removeClass("alert-success");
                             $("#modal_message_"+$item_id).addClass('alert-danger');
+                            $(".bidder_block_"+$item_id).html(data.bidder+' - ');
                             $bid_field.attr('data-parsley-min',data.valid_bid);
                             break;
                         default:

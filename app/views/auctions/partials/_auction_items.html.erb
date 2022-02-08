@@ -1,4 +1,9 @@
-<% bid_logic = item.bid_values %>
+<% bid_logic = item.bid_values(@user) %>
+<% if bid_logic[:bidder] == 'You' %>
+  <% alert_type = 'alert-success' %>
+<% else %>
+  <% alert_type = 'alert-danger' %>
+<% end %>
 <div class="row mb-5 item_object">
   <div class="col-12">
     <div class="row header mb-3">
@@ -10,28 +15,28 @@
       </div>
     </div>
     <div class="row mb-3">
-      <div class="col-md-4 mb-3 text-center">
+      <div class="col-md-6 mb-3 text-center">
         <img class="img-fluid" src="<%= item.photo.decent_size.url %>">
       </div>
-      <div class="col-md-8">
+      <div class="col-md-6 mt-3 mb-3">
         <%= item.description %>
       </div>
     </div>
     <div class="row mb-3">
-      <div class="col-md-4 text-left mb-3">
-        <h4>
+      <div class="col-md-6 text-center mb-3">
+        <h5>
         <% if DateTime.now > section.end_time %>
-         Winning Bid: $<span id="item_bid_show_<%= item.id %>"><%= number_with_delimiter(bid_logic[:high_bid], :delimiter => ',') %></span>
+         Winning Bid: <span class="winning_bid_block <%= item.id %> alert  <%= alert_type %>" role="alert"><span class="bidder_block_<%= item.id %>"><%= bid_logic[:bidder] %> - </span>$<span id="item_bid_show_<%= item.id %>"><%= number_with_delimiter(bid_logic[:high_bid], :delimiter => ',') %></span></span>
         <% else %>
           <% if bid_logic[:high_bid] == 0 %>
-            Starting Bid: $<span id="item_bid_show_<%= item.id %>"><%= number_with_delimiter(bid_logic[:valid_bid], :delimiter => ',') %></span>
+              <span class="bid_type_<%= item.id %>">Starting</span> Bid: <span class="winning_bid_block <%= item.id %> alert alert-warning" role="alert"><span class="bidder_block_<%= item.id %>"><%= bid_logic[:bidder] %></span> $<span id="item_bid_show_<%= item.id %>"><%= number_with_delimiter(bid_logic[:valid_bid], :delimiter => ',') %></span></span>
           <% else %>
-            Current Highest Bid: $<span id="item_bid_show_<%= item.id %>"><%= number_with_delimiter(bid_logic[:high_bid], :delimiter => ',') %></span>
+              Highest Bid: <span class="winning_bid_block <%= item.id %> alert  <%= alert_type %>" role="alert"><span class="bidder_block_<%= item.id %>"><%= bid_logic[:bidder] %> - </span> $<span id="item_bid_show_<%= item.id %>"><%= number_with_delimiter(bid_logic[:high_bid], :delimiter => ',') %></span></span>
           <% end %>
         <% end %>
-        </h4>
+        </h5>
       </div>
-      <div class="col-md-8">
+      <div class="col-md-6">
         <% unless DateTime.now > section.end_time %>
         <button type="button" id="bid_pop_<%= item.id %>" class="btn btn-block btn-success" data-toggle="modal" data-target="#bidModal_<%= item.id %>">
           Bid

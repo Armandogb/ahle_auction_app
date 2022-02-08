@@ -16,7 +16,7 @@ class BidsController < ApplicationController
     else
       @item.with_lock do
         @item.save!
-        bid_logic = @item.bid_values
+        bid_logic = @item.bid_values(@user)
 
         if bid >= bid_logic[:valid_bid].to_i
           out_bidded = bid_logic[:high_bid_object]
@@ -35,11 +35,13 @@ class BidsController < ApplicationController
           result[:message] = "Your bid is the highest bid!"
           result[:valid_bid] = bid + @item.min_bid
           result[:highest] = bid
+          result[:bidder] = "You"
         else
           result[:status] = 'outbid'
           result[:message] = "You have been outbid, raise your bid to $#{bid_logic[:valid_bid]}."
           result[:valid_bid] = bid_logic[:valid_bid]
           result[:highest] = bid_logic[:high_bid]
+          result[:bidder] = out_bidded.user.first_name
         end
       end
     end

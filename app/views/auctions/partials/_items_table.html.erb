@@ -44,12 +44,12 @@
             <td class="px-3 d-none d-md-table-cell"><%= item.min_bid %></td>
             <td class="px-3 d-md-table-cell"><%= item.active.to_s.titleize %></td>
             <td class="px-3 d-md-table-cell text-center">
-              <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#item_bids_modal_<%= item.id %>">
+              <button type="button" class="btn btn-success btn-sm mb-1" data-toggle="modal" data-target="#item_bids_modal_<%= item.id %>">
                 Bids
               </button>
-              <%= link_to 'Edit', edit_item_path(item), class: "btn btn-sm btn-primary" %>
+              <%= link_to 'Edit', edit_item_path(item), class: "btn btn-sm btn-primary mb-1" %>
               <%= link_to 'Delete', item_path(item), method: :delete,
-                          data: { confirm: 'Are you sure?' }, class: "btn btn-sm btn-danger" %>
+                          data: { confirm: 'Are you sure?' }, class: "btn btn-sm btn-danger mb-1" %>
               <%= render partial: "auctions/partials/item_bids_modal", locals: { item: item } %>
             </td>
           </tr>

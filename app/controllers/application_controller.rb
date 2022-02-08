@@ -6,6 +6,10 @@ class ApplicationController < ActionController::Base
 
   def set_user
     @user = current_user
+
+    if @user.present?
+      session[:user_id] = @user.id
+    end
   end
 
   def admin_check
