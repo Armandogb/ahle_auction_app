@@ -162,3 +162,8 @@ a:hover{
 .winning_bid_block, .starting_bid_block, .highest_bid_block{
   padding: 2px;
 }
+
+.item_description{
+  max-height: 200px;
+  overflow-y: scroll;
+}

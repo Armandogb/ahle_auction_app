@@ -1,0 +1,27 @@
+
+<div id="accordion" class="mt-3">
+
+  <% @sections.each do |section| %>
+    <div class="card" id="section_card_<%= section.id %>">
+      <div class="card-header" id="heading_<%= section.id %>">
+
+        <div class="row" data-toggle="collapse" data-target="#collapse_<%= section.id %>" aria-expanded="true" aria-controls="collapse_<%= section.id %>">
+              <div class="col-md-6 mb-3 text-center">
+                <h1><i class="fa fa-arrow-circle-down" aria-hidden="true"></i> <%= section.display_name %></h1>
+              </div>
+              <div class="col-md-6">
+                <%= render partial: "auctions/partials/timer_partial", locals: { section: section } %>
+              </div>
+            </div>
+
+      </div>
+      <div id="collapse_<%= section.id %>" class="collapse collapsed" aria-labelledby="heading_<%= section.id %>" data-parent="#accordion">
+        <div class="card-body">
+          <% section.items.each do |item| %>
+            <%= render partial: "auctions/partials/auction_items", locals: { item: item, section: section } %>
+          <% end %>
+        </div>
+      </div>
+    </div>`
+  <% end %>
+</div>

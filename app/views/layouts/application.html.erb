@@ -22,7 +22,9 @@
 <div class="container-fluid p-0">
 
   <% if current_user.present? %>
-    <%= render 'application/nav_bar_top.html.erb' %>
+    <% unless action_name == 'auction_timer' %>
+      <%= render 'application/nav_bar_top.html.erb' %>
+    <% end  %>
   <% end %>
 
   <div class="container" role="main">
