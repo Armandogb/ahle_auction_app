@@ -19,7 +19,7 @@
         <img class="img-fluid" src="<%= item.photo.decent_size.url %>">
       </div>
       <div class="col-md-6 mt-3 mb-3 item_description">
-        <%= item.description %>
+        <%= simple_format(item.description) %>
       </div>
     </div>
     <div class="row mb-3">
