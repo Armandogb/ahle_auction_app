@@ -81,6 +81,7 @@ $( document ).ready(function() {
         let $bid = $bid_field.val();
         let $form = $('#bid_form_'+$item_id);
 
+        $("#loading_modal").removeClass('d-none');
         $("#modal_message_"+$item_id).addClass('d-none');
         $("#modal_message_"+$item_id).removeClass('alert-danger');
         $("#modal_message_"+$item_id).removeClass('alert-success');
@@ -91,7 +92,6 @@ $( document ).ready(function() {
             if (confirm('Are you sure you would like to bid $'+parseInt($bid).toLocaleString()+'?')) {
 
                 $.get("/a/create_a_bid/"+$item_id+"/"+$user_id+"/"+$bid+".json", function(data, status){
-                    $("#loading_modal").removeClass('d-none');
 
                     switch(data.status) {
                         case 'ok':
@@ -133,6 +133,8 @@ $( document ).ready(function() {
 
                 });
             };
+        }else{
+            $("#loading_modal").addClass('d-none');
         };
     });
 

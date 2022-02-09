@@ -56,9 +56,5 @@ class Item < ApplicationRecord
     return bid
   end
 
-  def self.selectable_items
-
-  end
-
 
 end

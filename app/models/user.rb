@@ -27,6 +27,8 @@ class User < ApplicationRecord
       msg = "You've been outbid! They bid #{entity[:bid]} on #{entity[:item_name]}! Click #{bidded_auctions} to view your bidded on items to rebid!".squish
     when 'high_bid'
       msg = "You are the highest bidder on #{entity[:item_name]} with a #{entity[:bid]} bid!".squish
+    when 'winner'
+      msg = "You Won #{entity[:item_name]} with a #{entity[:winning_bid]} bid! Go claim your prize!".squish
     end
 
     to_phone = self.phone
