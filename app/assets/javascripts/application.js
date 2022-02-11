@@ -17,12 +17,10 @@
 //= require bootstrap-sprockets
 //= require parsley
 //= require countdown.js
-//= require datatables.js
-//= require_tree .
+
 
 
 $( document ).ready(function() {
-
 
     if (window.location.href.indexOf("/admin") > -1) {
         $('#nav_admin').addClass('active');
@@ -50,27 +48,29 @@ $( document ).ready(function() {
     });
 
 
+    if($(".auctions.index, .auctions.my_items_index").length > 0){
+        gon.timers.forEach(a => {
+            let sect_id = a[0]
+            let time = a[1]
 
-    gon.timers.forEach(a => {
-        let sect_id = a[0]
-        let time = a[1]
-
-        $('.section_timer_'+sect_id).countdown({
-            date: time,
-            offset: -6,
-            day: 'Day',
-            days: 'Days',
-            hour: 'Hour',
-            hours: 'Hours',
-            minute: 'Minute',
-            minutes: 'Minutes',
-            second: 'Second',
-            seconds: 'Seconds'
-        }, function (container) {
-            $("#section_card_"+sect_id).addClass('d-none');
-            $("#modal_message_"+$item_id).addClass('alert-success');
+            $('.section_timer_'+sect_id).countdown({
+                date: time,
+                offset: -6,
+                day: 'Day',
+                days: 'Days',
+                hour: 'Hour',
+                hours: 'Hours',
+                minute: 'Minute',
+                minutes: 'Minutes',
+                second: 'Second',
+                seconds: 'Seconds'
+            }, function (container) {
+                $("#section_card_"+sect_id).addClass('d-none');
+                $("#modal_message_"+$item_id).addClass('alert-success');
+            });
         });
-    });
+    };
+
 
 
     $('.bid_submit_but').click(function() {

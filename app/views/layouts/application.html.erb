@@ -27,7 +27,13 @@
     <% end  %>
   <% end %>
 
-  <div class="container" role="main">
+  <% if action_name == 'auction_timer' %>
+    <% cont_size = 'container-fluid' %>
+  <% else %>
+    <% cont_size = 'container' %>
+  <% end  %>
+
+  <div class="<%= cont_size %>" role="main">
     <%= yield %>
   </div>
 

@@ -3,6 +3,8 @@ class Item < ApplicationRecord
   has_many :bids
   mount_uploader :photo, ItemPicUploader
 
+  validates :photo, presence: true
+
   def bid_values(user)
     bids = self.bids
     results = {
@@ -34,6 +36,16 @@ class Item < ApplicationRecord
 
   def section_q
     self.sections.first
+  end
+
+  def section_label
+    sect = self.sections.first
+
+    if sect.present?
+      return sect.display_name
+    else
+      return "No Section"
+    end
   end
 
   def create_js_time_array

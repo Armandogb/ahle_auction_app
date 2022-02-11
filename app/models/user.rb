@@ -46,6 +46,10 @@ class User < ApplicationRecord
 
   end
 
+  def human_phone
+    return  ActionController::Base.helpers.number_to_phone(self.phone, area_code: true)
+  end
+
 
   private
 

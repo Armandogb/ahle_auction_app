@@ -2,6 +2,7 @@ class AuctionsController < ApplicationController
   before_action :authenticate_user!, except: %i[ auction_timer ]
   before_action :admin_check, except: %i[ index my_items_index auction_timer]
   before_action :set_auction, only: %i[ show edit update destroy ]
+  layout "auction_timer_layout", only: [ :auction_timer ]
 
   # GET /auctions or /auctions.json
   def index
@@ -13,7 +14,7 @@ class AuctionsController < ApplicationController
 
   def auction_timer
     @auction = Auction.active_auction
-    @sections = @auction.active_sections
+    @sections = @auction.sections
     gon.timers = @auction.create_js_time_array
   end
 
@@ -24,11 +25,15 @@ class AuctionsController < ApplicationController
   end
 
   def my_items_index
-    @items = @user.items.uniq
+    @items_col = @user.items.uniq
+    @items = []
     results = []
 
-    @items.each do |i|
-      results << i.create_js_time_array
+    @items_col.each do |i|
+      unless i.section_q.nil?
+        results << i.create_js_time_array
+        @items << i
+      end
     end
     gon.timers = results
 

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <%= csrf_meta_tags %>
+
+  <title>AHLE Auction</title>
+
+  <link rel="icon" type="image/png" href="/favicon.ico">
+  <%= stylesheet_link_tag 'application', media: 'all' %>
+
+
+  <%= include_gon(:init => true) %>
+</head>
+
+<body class="<%= controller_name %> <%= action_name %>">
+
+
+<div class="container-fluid p-0">
+    <%= yield %>
+</div>
+
+<%= javascript_include_tag 'auction_timer_main' %>
+
+
+</body>
+</html>

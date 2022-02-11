@@ -13,7 +13,7 @@ class Bid < ApplicationRecord
   def bid_label
     usr = self.user
     itm = self.item
-    "#{itm.name} - #{usr.first_name} #{usr.last_name} - #{self.dollar_value} - #{self.format_date}"
+    "#{itm.name} - #{usr.first_name} #{usr.last_name} - #{usr.human_phone} - #{self.dollar_value} - #{self.format_date}"
   end
 
 end

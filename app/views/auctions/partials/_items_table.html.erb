@@ -27,6 +27,7 @@
         <tr>
           <th class="d-none d-md-table-cell">Photo</th>
           <th class="d-md-table-cell">Title</th>
+          <th class="d-md-table-cell">Section</th>
           <th class="d-none d-md-table-cell">Starting Bid</th>
           <th class="d-none d-md-table-cell">Minimum Bid</th>
           <th class="d-md-table-cell">Active?</th>
@@ -40,6 +41,7 @@
           <tr>
             <td class="d-none d-md-table-cell px-3"><%= image_tag(item.photo.thumb.url , class: 'img-fluid') %></td>
             <td class="px-3"><%= item.name %></td>
+            <td class="px-3"><%= item.section_label %></td>
             <td class="px-3 d-none d-md-table-cell"><%= item.starting_bid %></td>
             <td class="px-3 d-none d-md-table-cell"><%= item.min_bid %></td>
             <td class="px-3 d-md-table-cell"><%= item.active.to_s.titleize %></td>
