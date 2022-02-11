@@ -15,7 +15,7 @@
             </div>
 
       </div>
-      <div id="collapse_<%= section.id %>" class="collapse collapsed" aria-labelledby="heading_<%= section.id %>" data-parent="#accordion">
+      <div id="collapse_<%= section.id %>" class="collapse collapsed" aria-labelledby="heading_<%= section.id %>">
         <div class="card-body">
           <% section.items.each do |item| %>
             <%= render partial: "auctions/partials/auction_items", locals: { item: item, section: section } %>
