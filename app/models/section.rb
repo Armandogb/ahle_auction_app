@@ -28,7 +28,7 @@ class Section < ApplicationRecord
       end
     end
 
-    return all_items.where(id: item_ids - other_section_item_ids)
+    return all_items.where(id: item_ids - other_section_item_ids).order(:name)
   end
 
 end
