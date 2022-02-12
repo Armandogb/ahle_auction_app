@@ -20,8 +20,8 @@ class AuctionsController < ApplicationController
 
   def admin_index
     @auctions = Auction.all
-    @sections = Section.all
-    @items = Item.all
+    @sections = Section.all.order(end_time: :asc)
+    @items = Item.all.order(:name)
   end
 
   def my_items_index

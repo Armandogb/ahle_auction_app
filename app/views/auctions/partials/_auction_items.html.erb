@@ -18,8 +18,14 @@
       <div class="col-md-6 mb-3 text-center">
         <img class="img-fluid" src="<%= item.photo.decent_size.url %>">
       </div>
-      <div class="col-md-6 mt-3 mb-3 item_description">
-        <%= simple_format(item.description) %>
+      <div class="col-md-6 mt-3 mb-3">
+        <div class="row">
+          <div class="col-1"></div>
+          <div class="col-10 item_description_auction">
+            <%= simple_format(item.description) %>
+          </div>
+          <div class="col-1"></div>
+        </div>
       </div>
     </div>
     <div class="row mb-3">

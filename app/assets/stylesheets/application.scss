@@ -175,9 +175,12 @@ a:hover{
   padding: 2px;
 }
 
-.item_description{
-  max-height: 200px;
+.item_description_auction{
+  height: 200px;
   overflow-y: scroll;
+  border: 4px $dark-blue solid;
+  border-radius: 5px;
+  background: #eeeeee;
 }
 
 
