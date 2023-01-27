@@ -1,5 +1,5 @@
 class Item < ApplicationRecord
-  has_and_belongs_to_many :sections
+  belongs_to :section
   has_many :bids
   mount_uploader :photo, ItemPicUploader
 

@@ -29,6 +29,8 @@ class User < ApplicationRecord
       msg = "You are the highest bidder on #{entity[:item_name]} with a #{entity[:bid]} bid!".squish
     when 'winner'
       msg = "You Won #{entity[:item_name]} with a #{entity[:winning_bid]} bid! Go claim your prize!".squish
+    when 'time'
+      msg = "#{entity[:display_name]} will be ending in less than #{entity[:time_left]} Minutes!".squish
     end
 
     to_phone = self.phone

@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '2.4.1'
+ruby '2.7.7'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.2.6'
@@ -81,3 +81,7 @@ gem 'twilio-ruby'
 gem 'jquery-datatables'
 gem 'mimemagic', github: 'mimemagicrb/mimemagic', ref: '01f92d86d15d85cfd0f20dabd025dcbd36a8a60f'
 gem 'write_xlsx'                          # create spreadsheets
+gem "net-http"
+gem "net-smtp"
+gem "net-imap"
+gem "uri", "0.10.0"

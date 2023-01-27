@@ -20,15 +20,8 @@
     <div class="col-12">
       <%= f.input :end_time, required: true %>
     </div>
-    <div class="col-12">
-      <h5 class="card-title mb-2">Items Linked to Section</h5>
-      <%= f.input :item_ids,
-                  collection: @section.selectable_items,
-                  label_method: :name,
-                  label: false,
-                  input_html: { multiple: true, size: 15 },
-                  hint: 'Select as many items, hold control / command while clicking.'
-      %>
+    <div class="col-12 mt-2">
+      <%= f.input :auction_id, collection: Auction.all.order(:name), required: true, prompt: "Add to Auction", label: "Auction" %>
     </div>
     <div class="col-12">
       <%= f.input :active, required: true %>

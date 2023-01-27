@@ -27,6 +27,9 @@
     <div class="col-sm-6">
       <%= f.input :description, required: true, as: :text, :input_html => { :rows => 6 } %>
     </div>
+    <div class="col-12 mt-2">
+      <%= f.input :section_id, collection: Section.all.order(:display_name), required: true, prompt: "Add to Section", label: "Section" %>
+    </div>
     <div class="col-6 mt-2">
       <%= f.input :starting_bid, required: true %>
     </div>

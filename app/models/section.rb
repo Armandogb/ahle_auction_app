@@ -1,5 +1,6 @@
 class Section < ApplicationRecord
-  has_and_belongs_to_many :items
+  has_many :items
+  belongs_to :auction
 
   def js_date_string
     return self.end_time.strftime("%m/%d/%Y %H:%M:%S")
