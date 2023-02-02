@@ -45,13 +45,25 @@ namespace :util do
       unless section.time_expired?
 
         if section_time_left <= two_minutes
-          results[:time_left] = 2
+          
+          unless section.two_minute_text_sent
+            section.update(two_minute_text_sent: true)
+            results[:time_left] = 2
+          end
 
         elsif section_time_left <= five_minutes
-          results[:time_left] = 5
+          
+          unless section.five_minute_text_sent
+            section.update(five_minute_text_sent: true)
+            results[:time_left] = 5
+          end
 
         elsif section_time_left <= ten_minutes
-          results[:time_left] = 10
+          
+          unless section.ten_minute_text_sent
+            section.update(ten_minute_text_sent: true)
+            results[:time_left] = 10
+          end
           
         end
 

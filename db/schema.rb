@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_01_22_073058) do
+ActiveRecord::Schema.define(version: 2023_02_02_050613) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -70,6 +70,7 @@ ActiveRecord::Schema.define(version: 2023_01_22_073058) do
     t.datetime "end_time"
     t.boolean "active", default: true
     t.integer "auction_id"
+    t.jsonb "text_alerts", default: {}, null: false
   end
 
   create_table "users", force: :cascade do |t|

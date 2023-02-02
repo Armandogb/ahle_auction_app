@@ -1,6 +1,14 @@
 class Section < ApplicationRecord
   has_many :items
   belongs_to :auction
+  after_create :set_alerts
+
+
+  def self.text_alert_times
+    %i[two_minute_text_sent five_minute_text_sent ten_minute_text_sent]
+  end
+
+  store_accessor :text_alerts, Section.text_alert_times
 
   def js_date_string
     return self.end_time.strftime("%m/%d/%Y %H:%M:%S")
@@ -66,6 +74,15 @@ class Section < ApplicationRecord
     end
 
     return all_items.where(id: item_ids - other_section_item_ids).order(:name)
+  end
+
+  private
+
+  def set_alerts
+    Section.text_alert_times.each do |alert|
+      self[:text_alerts][alert.to_sym] = false
+    end
+    self.save
   end
 
 end
