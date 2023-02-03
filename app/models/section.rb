@@ -42,6 +42,8 @@ class Section < ApplicationRecord
       begin
         response = rest_client.messages.create(from: from_number, to: '+1' + to_phone, body: msg)
 
+        puts "sent #{entity[:display_name]} - #{entity[:time_left]} - to #{to_phone}"
+        
       rescue Twilio::REST::RestError => e
         message = e.message
 

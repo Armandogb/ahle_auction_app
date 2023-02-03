@@ -70,6 +70,8 @@ namespace :util do
         if results[:time_left] > 0
           Section.send_timer_texts(results)
           puts "#{section.display_name} - #{section.end_time} - ending in #{section_time_left}"
+        else
+          puts "no #{section.display_name} alert"
         end
 
       end

@@ -35,11 +35,11 @@ class Item < ApplicationRecord
   end
 
   def section_q
-    self.sections.first
+    self.section
   end
 
   def section_label
-    sect = self.sections.first
+    sect = self.section
 
     if sect.present?
       return sect.display_name

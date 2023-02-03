@@ -5,7 +5,7 @@ class BidsController < ApplicationController
   def ajax_create_bid
     @item = Item.find(params[:item_id])
     @user = User.find(params[:user_id])
-    @end_time = @item.sections.first.end_time
+    @end_time = @item.section.end_time
     time = DateTime.now
     bid = params[:bid].to_i
     result = {}
