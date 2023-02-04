@@ -15,7 +15,7 @@
 
 <div class="row">
   <div class="col-12">
-    <h1>Create Account</h1>
+    <h2>Create Auction Account</h2>
   </div>
 </div>
 
@@ -29,11 +29,11 @@
     <div class="form-row">
       <div class="col-6">
         <%= f.input :first_name, label: 'First Name', required: true, autofocus: params[:action] == 'new',
-                    maxlength: 50, input_html: { autocomplete: "first_name" } %>
+                    maxlength: 50, input_html: { autocomplete: "given-name" } %>
       </div>
       <div class="col-6">
         <%= f.input :last_name, label: 'Last Name', required: true, autofocus: params[:action] == 'new',
-                    maxlength: 50, input_html: { autocomplete: "last_name" } %>
+                    maxlength: 50, input_html: { autocomplete: "family-name" } %>
       </div>
     </div>
 
@@ -87,7 +87,7 @@
 
     <div class="form-row">
       <div class="col-md-6">
-          <%= f.input :phone, required: true, maxlength: 10, input_html: { autocomplete: "phone" }  %>
+          <%= f.input :phone, label: "10 Digit Phone (for text alerts)", required: true, maxlength: 10, input_html: { autocomplete: "phone" }  %>
       </div>
       <div class="col-md-6">
         <%= f.input :sign_up_code, label: "Sign Up Code (Optional)" %>
