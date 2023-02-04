@@ -48,7 +48,7 @@
         <div class="col-sm-6">
           <% email_confirmation_data = { 'parsley-equalto': '#user_email', 'parsley-maxlength': 100 } %>
           <%= f.input :email_confirmation, label: 'Confirm Email', maxlength: 100,
-                      required: !is_edit, input_html: { autocomplete: "email_confirmation", data: email_confirmation_data } %>
+                      required: !is_edit, input_html: { autocomplete: "email", data: email_confirmation_data } %>
         </div>
       <% end %>
     </div>
