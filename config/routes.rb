@@ -2,6 +2,8 @@ Rails.application.routes.draw do
 
   root to: 'auctions#index', as: :root
 
+  get '/admin/reset_sections', to: 'sections#reset_sections', as: :reset_sections
+
   get '/auction_timer', to: 'auctions#auction_timer', as: :auction_timer
 
   get '/a/create_a_bid/:item_id/:user_id/:bid', to: 'bids#ajax_create_bid', as: :ajax_create_bid

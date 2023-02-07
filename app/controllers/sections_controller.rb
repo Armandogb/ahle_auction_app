@@ -21,6 +21,19 @@ class SectionsController < ApplicationController
   def edit
   end
 
+  def reset_sections
+    @sections = Section.all
+
+    @sections.each do |sect|
+      sect.set_alerts(false)
+      sect.active = true
+      sect.save
+    end
+
+    redirect_to admin_index_path, notice: "Sections Active and texts reset."
+
+  end
+
   # POST /sections or /sections.json
   def create
     @section = Section.new(section_params)

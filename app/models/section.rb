@@ -1,7 +1,7 @@
 class Section < ApplicationRecord
   has_many :items
   belongs_to :auction
-  after_create :set_alerts
+  after_create  Proc.new{ set_alerts(false) }
 
 
   def self.text_alert_times
@@ -43,7 +43,7 @@ class Section < ApplicationRecord
         response = rest_client.messages.create(from: from_number, to: '+1' + to_phone, body: msg)
 
         puts "sent #{entity[:display_name]} - #{entity[:time_left]} - to #{to_phone}"
-        
+
       rescue Twilio::REST::RestError => e
         message = e.message
 
@@ -78,11 +78,9 @@ class Section < ApplicationRecord
     return all_items.where(id: item_ids - other_section_item_ids).order(:name)
   end
 
-  private
-
-  def set_alerts
+  def set_alerts(bool)
     Section.text_alert_times.each do |alert|
-      self[:text_alerts][alert.to_sym] = false
+      self[:text_alerts][alert.to_sym] = bool
     end
     self.save
   end

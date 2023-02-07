@@ -9,6 +9,10 @@
       <%#= link_to('Download Results', auctions_report_path, class: 'btn btn-sm btn-primary mb-1 ml-2', target: '_report') %>
       <!--      </small>-->
 
+      <small>
+            <%= link_to 'Reset', reset_sections_path,
+                          data: { confirm: 'Are you sure you want to reset the texts / actve status?' }, class: "btn btn-sm btn-warning mb-1" %>
+      </small>
     </h2>
   </div>
 </div>
@@ -21,15 +25,13 @@
 
     <div class="sections">
 
-
       <table id="section_data" class="table table-sm table-bordered table-striped my-4">
         <thead class="thead-dark">
         <tr>
           <th class="d-md-table-cell">Title</th>
           <th class="d-none d-md-table-cell">Items</th>
           <th class="d-none d-md-table-cell">End Time</th>
-          <th class="d-md-table-cell">Active?</th>
-          <th class="d-md-table-cell text-center actions">Actions</th>
+          <th class="d-md-table-cell text-center actions">Actions </th>
         </tr>
         </thead>
 
@@ -37,14 +39,19 @@
         <% @sections.each do |section| %>
           <% itms = section.items %>
           <tr>
-            <td class="px-3"><%= section.title %></td>
+            <td class="px-3"><b><%= section.title %></b></br>
+              Active 
+              <% if section.active %>
+                <small><b class="text-success"><%= section.active.to_s.titleize %></b></small>
+              <% else %>
+                <small><b class="text-danger"><%= section.active.to_s.titleize %></b></small>
+              <% end %></td>
             <td class="d-none d-md-table-cell px-3">
               <% itms.order(:name).each do |i| %>
               <%= "#{i.name}<br>".html_safe %>
               <% end %>
             </td>
             <td class="d-none d-md-table-cell px-3"><%= section.view_date_string %></td>
-            <td class="px-3 d-md-table-cell"><%= section.active.to_s.titleize %></td>
             <td class="px-3 d-md-table-cell text-center">
               <% if section.time_expired?  %>
                 <button type="button" class="btn btn-success btn-sm mb-1" data-toggle="modal" data-target="#winner_modal_<%= section.id %>">

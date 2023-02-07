@@ -31,10 +31,15 @@
       <%= f.input :section_id, collection: Section.all.order(:display_name), required: true, prompt: "Add to Section", label: "Section" %>
     </div>
     <div class="col-6 mt-2">
-      <%= f.input :starting_bid, required: true %>
+      <%= f.input :starting_bid, required: true, label: "Base Bid" %>
     </div>
     <div class="col-6 mt-2">
-      <%= f.input :min_bid, required: true %>
+      <%= f.input :min_bid, required: true, label: "Minimum Bid Increment" %>
+    </div>
+    <div class="col-12 my-2">
+      <small>
+        <b>*** Opening bid will be the Base Bid + the Minimum Bid Increment</b>
+      </small>
     </div>
     <div class="col-12">
       <%= f.input :active %>

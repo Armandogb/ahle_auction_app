@@ -30,6 +30,10 @@ $( document ).ready(function() {
         $('#nav_auctions').addClass('active');
     };
 
+    $("#item_data").dataTable({
+        paging: true
+    });
+
 
     $('.simple_form.bid').submit(false);
 
@@ -119,6 +123,7 @@ $( document ).ready(function() {
                             $("#item_bid_show_"+$item_id).html(data.highest.toLocaleString());
                             $(".winning_bid_block."+$item_id).removeClass("alert-warning");
                             $(".winning_bid_block."+$item_id).removeClass("alert-success");
+                            $(".winning_bid_block."+$item_id).addClass("alert-danger");
                             $("#modal_message_"+$item_id).addClass('alert-danger');
                             $(".bidder_block_"+$item_id).html(data.bidder+' - ');
                             $bid_field.attr('data-parsley-min',data.valid_bid);

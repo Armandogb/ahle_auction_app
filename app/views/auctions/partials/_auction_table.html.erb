@@ -20,7 +20,6 @@
         <tr>
           <th class="d-md-table-cell">Title</th>
           <th class="d-none d-md-table-cell">Sections</th>
-          <th class="d-md-table-cell">Active?</th>
           <th class="d-md-table-cell text-center actions">Actions</th>
         </tr>
         </thead>
@@ -29,13 +28,20 @@
         <% @auctions.each do |auction| %>
 
           <tr>
-            <td class="px-3"><%= auction.name %></td>
+            <td class="px-3">
+              <b><%= auction.name %></b></br>
+                Active 
+                <% if auction.active %>
+                  <b class="text-success"><%= auction.active.to_s.titleize %></b>
+                <% else %>
+                  <b class="text-danger"><%= auction.active.to_s.titleize %></b>
+                <% end %>
+              </td>
             <td class="d-none d-md-table-cell px-3">
               <% auction.sections.order(end_time: :asc).each do |s| %>
                 <%= "#{s.title}<br>".html_safe %>
               <% end %>
             </td>
-            <td class="px-3 d-md-table-cell"><%= auction.active.to_s.titleize %></td>
             <td class="px-3 d-md-table-cell text-center">
               <%= link_to 'Edit', edit_auction_path(auction), class: "btn btn-sm btn-primary mb-1" %>
               <%= link_to 'Delete', auction_path(auction), method: :delete,
