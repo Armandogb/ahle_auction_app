@@ -29,6 +29,17 @@ font-family: "Helvetica Neue", Helvetica, Arial, Sans-Serif !important;
   color: white !important;
 }
 
+.admin_index{
+  #item_data{
+    td{
+      .descrip_item_table {
+        max-height: 10vw;
+        overflow-y: scroll;
+      }
+    }
+  }
+}
+
 .navbar{
   color: $sky-blue !important;
   background: $water-blue;
