@@ -3,8 +3,6 @@ class Item < ApplicationRecord
   has_many :bids
   mount_uploader :photo, ItemPicUploader
 
-  validates :photo, presence: true
-
   def bid_values(user)
     bids = self.bids
     results = {
@@ -66,6 +64,38 @@ class Item < ApplicationRecord
     end
 
     return bid
+  end
+
+  def photo_thumbnail_url
+    if self.photo.thumb.url.nil?
+      "no-image_thumb.jpg"
+    else
+      self.photo.thumb.url
+    end
+  end
+
+  def photo_full_url
+    if self.photo.decent_size.url.nil?
+      "no-image_full.jpg"
+    else
+      self.photo.decent_size.url
+    end
+  end
+
+  def scrubbed_description
+    if self.description.empty?
+      "no-description"
+    else
+      self.description
+    end
+  end
+
+  def scrubbed_title
+    if self.name.empty?
+      "no-title"
+    else
+      self.name
+    end
   end
 
 

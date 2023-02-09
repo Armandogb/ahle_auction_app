@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_02_02_050613) do
+ActiveRecord::Schema.define(version: 2023_02_09_010254) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,9 +36,9 @@ ActiveRecord::Schema.define(version: 2023_02_02_050613) do
   end
 
   create_table "items", force: :cascade do |t|
-    t.string "name", default: "", null: false
-    t.string "description", default: "", null: false
-    t.string "photo", null: false
+    t.string "name"
+    t.string "description"
+    t.string "photo"
     t.integer "starting_bid", default: 0, null: false
     t.integer "min_bid", default: 0, null: false
     t.boolean "active", default: true

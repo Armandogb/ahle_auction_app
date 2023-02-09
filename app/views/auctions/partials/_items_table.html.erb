@@ -14,6 +14,13 @@
 </div>
 
 <div class="row">
+  <div class="col-sm-12 text-right">
+    
+
+  </div>
+</div>
+
+<div class="row">
   <div class="col-12">
 
     <%# ************************************** %>
@@ -29,7 +36,7 @@
           <th class="d-md-table-cell">Title</th>
           <th class="d-md-table-cell" style="width: 25%" >Description</th>
           <th class="d-none d-md-table-cell" style="width: 23%" >Bid </br>Structure</th>
-          <th class="d-md-table-cell text-center actions">Actions</th>
+          <th class="d-md-table-cell text-center actions"><button type="button" class="btn btn-warning btn-sm mb-1" data-toggle="modal" data-target="#tip_modal">Search Tips</button></br> Actions</th>
         </tr>
         </thead>
 
@@ -38,7 +45,7 @@
 
           <tr>
             <td class="d-md-table-cell px-3">
-              <%= image_tag(item.photo.thumb.url , class: 'img-fluid') %></br>
+              <%= image_tag(item.photo_thumbnail_url , class: 'img-fluid') %></br>
               <%= item.section_label.gsub(" ","-") %></br>
               Active 
               <% if item.active %>
@@ -46,9 +53,10 @@
               <% else %>
                 <b class="text-danger"><%= item.active.to_s.titleize %></b>
               <% end %>
+              <div style="display: none;"><%= item.photo_thumbnail_url %></div>
             </td>
-            <td class="px-3"><%= item.name %></td>
-            <td class="px-3"><div class="descrip_item_table" ><%= item.description %></div></td>
+            <td class="px-3"><%= item.scrubbed_title %></td>
+            <td class="px-3"><div class="descrip_item_table" ><%= item.scrubbed_description %></div></td>
             <td class="px-3 d-none d-md-table-cell">
               Base <b>(<%= item.starting_bid.to_i %>)</b></br>
               Increment <b>(<%= item.min_bid.to_i %>)</b></br>
@@ -71,3 +79,5 @@
     </div>
   </div>
 </div>
+
+<%= render partial: "auctions/partials/tips_modal" %>

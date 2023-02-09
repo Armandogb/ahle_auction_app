@@ -12,11 +12,11 @@
 
   <div class="form-row">
     <div class="col-12">
-      <%= f.input :name, required: true %>
+      <%= f.input :name %>
     </div>
     <div class="col-sm-6 ">
       Item Photo<br>
-      <%= f.input :photo, as: :file, label: false, required: true %><br>
+      <%= f.input :photo, as: :file, label: false %><br>
       <%= f.hidden_field :photo_cache %>
       <% if f.object.photo.url.present? %>
         current: <%= image_tag(f.object.photo.decent_size.url , class: 'img-fluid') %>
@@ -25,16 +25,16 @@
       <% end %>
     </div>
     <div class="col-sm-6">
-      <%= f.input :description, required: true, as: :text, :input_html => { :rows => 6 } %>
+      <%= f.input :description, as: :text, :input_html => { :rows => 6 } %>
     </div>
     <div class="col-12 mt-2">
-      <%= f.input :section_id, collection: Section.all.order(:display_name), required: true, prompt: "Add to Section", label: "Section" %>
+      <%= f.input :section_id, collection: Section.all.order(:display_name), label: "Section", selected: f.object.section_id || Section.all.order(:display_name).first %>
     </div>
     <div class="col-6 mt-2">
-      <%= f.input :starting_bid, required: true, label: "Base Bid" %>
+      <%= f.input :starting_bid, label: "Base Bid" %>
     </div>
     <div class="col-6 mt-2">
-      <%= f.input :min_bid, required: true, label: "Minimum Bid Increment" %>
+      <%= f.input :min_bid, label: "Minimum Bid Increment" %>
     </div>
     <div class="col-12 my-2">
       <small>
