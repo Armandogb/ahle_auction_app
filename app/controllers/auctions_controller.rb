@@ -14,7 +14,7 @@ class AuctionsController < ApplicationController
 
   def auction_timer
     @auction = Auction.active_auction
-    @sections = @auction.sections
+    @sections = @auction.sections.order(end_time: :asc)
     gon.timers = @auction.create_js_time_array
   end
 

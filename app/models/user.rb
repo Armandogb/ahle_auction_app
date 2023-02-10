@@ -56,9 +56,11 @@ class User < ApplicationRecord
   private
 
   def check_sign_up_code
+    admin_code = ENV["SU_ADMIN"].to_s.downcase.squish
+    user_code = self.sign_up_code.downcase.squish
 
-    case self.sign_up_code
-      when ENV["SU_ADMIN"].to_s
+    case user_code
+      when admin_code
         @set_admin = true
       else
         @set_admin = false
