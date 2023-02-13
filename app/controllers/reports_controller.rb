@@ -44,7 +44,7 @@ class ReportsController < ApplicationController
       sheet.write(@starting_row, row_column_number, item.name)
       if high_bid.present?
         sheet.write(@starting_row, row_column_number+= 1, high_bid.dollar_value)
-        sheet.write(@starting_row, row_column_number+= 1, "#{high_bid.user.first_name} #{high_bid.user.first_name}")
+        sheet.write(@starting_row, row_column_number+= 1, "#{high_bid.user.first_name} #{high_bid.user.last_name}")
         sheet.write(@starting_row, row_column_number+= 1, "#{high_bid.user.email}")
         sheet.write(@starting_row, row_column_number+= 1, "#{high_bid.user.human_phone}")
         sheet.write(@starting_row, row_column_number+= 1, high_bid.format_date)
