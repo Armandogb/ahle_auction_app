@@ -7,7 +7,7 @@ class User < ApplicationRecord
 
   has_many :bids
   has_many :items, through: :bids
-  attr_accessor :email_confirmation, :sign_up_code
+  attr_accessor :email_confirmation, :sign_up_code, :read_sms_opt_in
 
   before_validation :check_sign_up_code
   after_create :final_steps
@@ -24,13 +24,13 @@ class User < ApplicationRecord
     when 'welcome'
       msg = "Welcome to the AHLE Auction! You will recieve text updates on the items you bid on.".squish
     when 'outbid'
-      msg = "You've been outbid! They bid #{entity[:bid]} on #{entity[:item_name]}! Click #{bidded_auctions} to view your bidded on items to rebid!".squish
+      msg = "AHLE Auction - You've been outbid! They bid #{entity[:bid]} on #{entity[:item_name]}! Click #{bidded_auctions} to rebid!".squish
     when 'high_bid'
-      msg = "You are the highest bidder on #{entity[:item_name]} with a #{entity[:bid]} bid!".squish
+      msg = "AHLE Auction - You are the highest bidder on #{entity[:item_name]} with a #{entity[:bid]} bid!".squish
     when 'winner'
-      msg = "You Won #{entity[:item_name]} with a #{entity[:winning_bid]} bid! Go claim your prize!".squish
+      msg = "AHLE Auction - ou Won #{entity[:item_name]} with a #{entity[:winning_bid]} bid! Go claim your prize!".squish
     when 'time'
-      msg = "#{entity[:display_name]} will be ending in less than #{entity[:time_left]} Minutes!".squish
+      msg = "AHLE Auction - #{entity[:display_name]} will be ending in less than #{entity[:time_left]} Minutes!".squish
     end
 
     to_phone = self.phone
