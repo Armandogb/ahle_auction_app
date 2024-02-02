@@ -49,7 +49,8 @@ class User < ApplicationRecord
 
     begin
       response = http.request(request)
-      puts response.read_body
+      
+      puts "sent Success to #{to_phone}"
     rescue 
       puts response.read_body
     end

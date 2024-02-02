@@ -1,3 +1,7 @@
+require 'uri'
+require 'net/http'
+require 'openssl'
+
 class Section < ApplicationRecord
   has_many :items
   belongs_to :auction
@@ -25,29 +29,34 @@ class Section < ApplicationRecord
 
   def self.send_timer_texts(entity)
     
-    account_sid = ENV["TWL_SID"]
-    auth_token = ENV["TWL_AUTH"]
-    from_number = ENV["TWL_NUM"]
+    api_key = ENV["EZ_API_KEY"]
     home_url = ENV["HOME_URL"]
     phone_numbers = User.all.pluck(:phone)
 
     msg = "#{entity[:display_name]} will be ending in less than #{entity[:time_left]} Minutes! #{home_url} ".squish
 
-    rest_client = Twilio::REST::Client.new account_sid, auth_token
-
     request_timer = 0
 
     phone_numbers.each do|phone|
-      to_phone = phone
+      to_phone = "1" + phone
+
+      url = URI("https://app2.simpletexting.com/v1/send?token=#{api_key}&phone=#{to_phone}&message=#{msg}")
+
+      http = Net::HTTP.new(url.host, url.port)
+      http.use_ssl = true
+      http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+
+      request = Net::HTTP::Post.new(url)
+      request["accept"] = 'application/json'
+      request["content-type"] = 'application/x-www-form-urlencoded'
+
       begin
-        response = rest_client.messages.create(from: from_number, to: '+1' + to_phone, body: msg)
+        response = http.request(request)
 
         puts "sent #{entity[:display_name]} - #{entity[:time_left]} - to #{to_phone}"
 
-      rescue Twilio::REST::RestError => e
-        message = e.message
-
-        puts "#{message}"
+      rescue 
+        puts response.read_body
       end
 
       request_timer += 1
