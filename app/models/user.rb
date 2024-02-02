@@ -1,3 +1,7 @@
+require 'uri'
+require 'net/http'
+require 'openssl'
+
 class User < ApplicationRecord
   rolify
   # Include default devise modules. Others available are:
@@ -15,38 +19,43 @@ class User < ApplicationRecord
 
   def send_text_message(message,entity)
 
-    account_sid = ENV["TWL_SID"]
-    auth_token = ENV["TWL_AUTH"]
-    from_number = ENV["TWL_NUM"]
     bidded_auctions = ENV["MY_BID_URL"]
 
     case message
     when 'welcome'
       msg = "Welcome to the AHLE Auction! You will recieve text updates on the items you bid on.".squish
     when 'outbid'
-      msg = "AHLE Auction - You've been outbid! They bid #{entity[:bid]} on #{entity[:item_name]}! Click #{bidded_auctions} to rebid!".squish
+      msg = "AHLE Auction: You've been outbid! They bid #{entity[:bid]} on #{entity[:item_name]}! Click #{bidded_auctions} to rebid!".squish
     when 'high_bid'
-      msg = "AHLE Auction - You are the highest bidder on #{entity[:item_name]} with a #{entity[:bid]} bid!".squish
+      msg = "AHLE Auction: You are the highest bidder on #{entity[:item_name]} with a #{entity[:bid]} bid!".squish
     when 'winner'
-      msg = "AHLE Auction - ou Won #{entity[:item_name]} with a #{entity[:winning_bid]} bid! Go claim your prize!".squish
+      msg = "AHLE Auction: You Won #{entity[:item_name]} with a #{entity[:winning_bid]} bid! Go claim your prize!".squish
     when 'time'
-      msg = "AHLE Auction - #{entity[:display_name]} will be ending in less than #{entity[:time_left]} Minutes!".squish
+      msg = "AHLE Auction: #{entity[:display_name]} will be ending in less than #{entity[:time_left]} Minutes!".squish
     end
 
-    to_phone = self.phone
+    api_key = ENV["EZ_API_KEY"]
+    to_phone = "1" + self.phone
 
-    rest_client = Twilio::REST::Client.new account_sid, auth_token
+    url = URI("https://app2.simpletexting.com/v1/send?token=#{api_key}&phone=#{to_phone}&message=#{msg}")
 
-      begin
-        response = rest_client.messages.create(from: from_number, to: '+1' + to_phone, body: msg)
+    http = Net::HTTP.new(url.host, url.port)
+    http.use_ssl = true
+    http.verify_mode = OpenSSL::SSL::VERIFY_NONE
 
-      rescue Twilio::REST::RestError => e
-        message = e.message
+    request = Net::HTTP::Post.new(url)
+    request["accept"] = 'application/json'
+    request["content-type"] = 'application/x-www-form-urlencoded'
 
-        puts "#{message}"
-      end
+    begin
+      response = http.request(request)
+      puts response.read_body
+    rescue 
+      puts response.read_body
+    end
 
   end
+
 
   def human_phone
     return  ActionController::Base.helpers.number_to_phone(self.phone, area_code: true)

@@ -87,7 +87,7 @@
 
     <div class="form-row">
       <div class="col-md-6">
-          <%= f.input :phone, label: "10 Digit Phone (for text alerts)", maxlength: 10, input_html: { autocomplete: "phone" }  %>
+          <%= f.input :phone, label: "10 Digit Phone (for text alerts)", maxlength: 10, required: true, input_html: { autocomplete: "phone" }  %>
       </div>
       <div class="col-md-6">
         <%= f.input :sign_up_code, label: "Code (Admin use only)" %>
@@ -102,7 +102,7 @@
       </div> -->
 
       <div class="col-md-12">
-          <%= f.input :read_sms_opt_in, as: :boolean, label: "By checking this box and providing your mobile number, you are agreeing to receive SMS messages from AHLE Auction regarding the items you have bid on. Message frequency may vary and Msg&Data rates may apply. Reply STOP to unsubscribe at any time.".html_safe  %>
+          <%= f.input :read_sms_opt_in, as: :boolean, label: "By checking this box and providing your mobile number, you are agreeing to receive SMS messages from AHLE Auction regarding the items you have bid on. Message frequency may vary and Msg&Data rates may apply. Reply STOP to unsubscribe at any time.".html_safe, required: true  %>
       </div>
 
     </div>
