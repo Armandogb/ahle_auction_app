@@ -33,7 +33,7 @@ class Section < ApplicationRecord
     home_url = ENV["HOME_URL"]
     phone_numbers = User.all.pluck(:phone)
 
-    msg = "AHLE Auction: #{entity[:display_name]} will be ending in less than #{entity[:time_left]} Minutes! #{home_url} ".squish
+    msg = "AHLE Auction: #{entity[:display_name]} will be ending in less than #{entity[:time_left]} Minutes!".squish
 
     request_timer = 0
 

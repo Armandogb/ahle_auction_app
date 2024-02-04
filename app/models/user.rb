@@ -25,7 +25,7 @@ class User < ApplicationRecord
     when 'welcome'
       msg = "Welcome to the AHLE Auction! You will recieve text updates on the items you bid on.".squish
     when 'outbid'
-      msg = "AHLE Auction: You've been outbid! They bid #{entity[:bid]} on #{entity[:item_name]}! Click #{bidded_auctions} to rebid!".squish
+      msg = "AHLE Auction: You've been outbid! They bid #{entity[:bid]} on #{entity[:item_name]}! View 'My Items' to rebid!".squish
     when 'high_bid'
       msg = "AHLE Auction: You are the highest bidder on #{entity[:item_name]} with a #{entity[:bid]} bid!".squish
     when 'winner'
