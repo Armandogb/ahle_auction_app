@@ -38,8 +38,9 @@ namespace :util do
       section_end_time = section.end_time.to_i
       section_time_left = section_end_time - current_time
       results = {
-        display_name: section.display_name,
-        time_left: 0
+        display_name: "*"+section.title.upcase+"*",
+        time_left: 0,
+        time_left_num: 0
       }
 
       unless section.time_expired?
@@ -48,30 +49,33 @@ namespace :util do
           
           unless section.two_minute_text_sent
             section.update(two_minute_text_sent: true)
-            results[:time_left] = 2
+            results[:time_left] = "TWO"
+            results[:time_left_num] = 2
           end
 
         elsif section_time_left <= five_minutes
           
           unless section.five_minute_text_sent
             section.update(five_minute_text_sent: true)
-            results[:time_left] = 5
+            results[:time_left] = "FIVE"
+            results[:time_left_num] = 5
           end
 
-        elsif section_time_left <= ten_minutes
+        # elsif section_time_left <= ten_minutes
           
-          unless section.ten_minute_text_sent
-            section.update(ten_minute_text_sent: true)
-            results[:time_left] = 10
-          end
+        #   unless section.ten_minute_text_sent
+        #     section.update(ten_minute_text_sent: true)
+        #     results[:time_left] = "TEN"
+        #     results[:time_left_num] = 10
+        #   end
           
         end
 
-        if results[:time_left] > 0
+        if results[:time_left_num] > 0
           Section.send_timer_texts(results)
-          puts "#{section.display_name} - #{section.end_time} - ending in #{section_time_left}"
+          puts "#{section.title} - #{section.end_time} - ending in #{section_time_left}"
         else
-          puts "no #{section.display_name} alert"
+          puts "no #{section.title} alert"
         end
 
       end
