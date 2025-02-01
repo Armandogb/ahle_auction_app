@@ -1,6 +1,8 @@
 require 'uri'
 require 'net/http'
 require 'openssl'
+require 'aws-sdk-sms'
+require 'aws-sdk-sns'
 
 class User < ApplicationRecord
   rolify
@@ -34,21 +36,19 @@ class User < ApplicationRecord
       msg = "AHLE Auction: #{entity[:display_name]} will be ending in less than #{entity[:time_left]} Minutes!".squish
     end
 
-    api_key = ENV["EZ_API_KEY"]
-    to_phone = "1" + self.phone
+    aws_region = ENV["AWS_SMS_REGION"]
+    aws_key_id = ENV["AWS_ACCESS_KEY"]
+    aws_secret_key = ENV["AWS_SECRET_KEY"]
+    to_phone = "+1" + self.phone
 
-    url = URI("https://app2.simpletexting.com/v1/send?token=#{api_key}&phone=#{to_phone}&message=#{msg}")
-
-    http = Net::HTTP.new(url.host, url.port)
-    http.use_ssl = true
-    http.verify_mode = OpenSSL::SSL::VERIFY_NONE
-
-    request = Net::HTTP::Post.new(url)
-    request["accept"] = 'application/json'
-    request["content-type"] = 'application/x-www-form-urlencoded'
+    sns = Aws::SNS::Client.new(
+      region: ENV['AWS_SMS_REGION'], 
+      access_key_id: ENV['AWS_ACCESS_KEY'], 
+      secret_access_key: ENV['AWS_SECRET_KEY']
+      )
 
     begin
-      response = http.request(request)
+      response = sns.publish({phone_number: to_phone, message: msg})
       
       puts "sent Success to #{to_phone}"
     rescue 
