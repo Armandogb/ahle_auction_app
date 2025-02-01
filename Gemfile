@@ -85,3 +85,5 @@ gem "net-http", '~> 0.3.2'
 gem "net-smtp", '~> 0.3.3'
 gem "net-imap", '~> 0.3.4'
 gem "uri", "0.10.0"
+gem 'aws-sdk-sms', '~> 1.66'
+gem 'aws-sdk-sns', '~> 1.94'
