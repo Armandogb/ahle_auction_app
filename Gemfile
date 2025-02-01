@@ -6,7 +6,7 @@ ruby '2.7.7'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.2.6'
 # Use sqlite3 as the database for Active Record
-gem 'pg'
+gem 'pg', '~> 1.4.5'
 # Use Puma as the app server
 gem 'puma', '~> 3.11'
 # Use SCSS for stylesheets
@@ -61,27 +61,27 @@ end
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
-gem 'devise'
-gem 'cancancan'
-gem 'rolify'
+gem 'devise', '~> 4.8.1'
+gem 'cancancan', '~> 3.4.0'
+gem 'rolify', '~> 6.0.0'
 gem 'inky-rb', require: 'inky'            # foundation emails templating pre-processor
 gem 'bootstrap', '~> 4.6.1'
-gem 'jquery-rails'
-gem 'premailer-rails'
-gem "figaro"
-gem 'credit_card_validations'
-gem "parsley-rails"
-gem 'simple_form'
-gem 'font-awesome-rails'
-gem 'gon'
-gem "fog"
-gem "fog-aws"
+gem 'jquery-rails', '~> 4.5.1'
+gem 'premailer-rails', '~> 1.12.0'
+gem "figaro", '~> 1.2.0'
+gem 'credit_card_validations', '~> 6.0.0'
+gem "parsley-rails", '~> 2.8.1.0'
+gem 'simple_form', '~> 5.1.0'
+gem 'font-awesome-rails', '~> 4.7.0.8'
+gem 'gon', '~> 6.4.0'
+gem "fog", '~> 2.3.0'
+gem "fog-aws", '~> 3.15.0'
 gem 'carrierwave', '~> 2.0'
-gem 'twilio-ruby'
-gem 'jquery-datatables'
+gem 'twilio-ruby', '~> 5.74.1'
+gem 'jquery-datatables', '~> 1.10.20'
 gem 'mimemagic', github: 'mimemagicrb/mimemagic', ref: '01f92d86d15d85cfd0f20dabd025dcbd36a8a60f'
-gem 'write_xlsx'                          # create spreadsheets
-gem "net-http"
-gem "net-smtp"
-gem "net-imap"
+gem 'write_xlsx', '~> 1.09.5'                          # create spreadsheets
+gem "net-http", '~> 0.3.2'
+gem "net-smtp", '~> 0.3.3'
+gem "net-imap", '~> 0.3.4'
 gem "uri", "0.10.0"
