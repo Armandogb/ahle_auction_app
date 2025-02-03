@@ -1,8 +1,6 @@
 require 'uri'
 require 'net/http'
 require 'openssl'
-require 'aws-sdk-sms'
-require 'aws-sdk-sns'
 
 class Section < ApplicationRecord
   has_many :items
@@ -31,9 +29,9 @@ class Section < ApplicationRecord
 
   def self.send_timer_texts(entity)
     
-    aws_region = ENV["AWS_SMS_REGION"]
-    aws_key_id = ENV["AWS_ACCESS_KEY"]
-    aws_secret_key = ENV["AWS_SECRET_KEY"]
+    account_sid = ENV["TWL_SID"]
+    auth_token = ENV["TWL_AUTH"]
+    from_number = ENV["TWL_NUM"]
     phone_numbers = User.all.pluck(:phone)
 
     msg = "AHLE Auction: #{entity[:display_name]} will be ending in less than #{entity[:time_left]} Minutes!".squish
@@ -43,19 +41,17 @@ class Section < ApplicationRecord
     phone_numbers.each do|phone|
       to_phone = "+1" + phone
 
-      sns = Aws::SNS::Client.new(
-      region: ENV['AWS_SMS_REGION'], 
-      access_key_id: ENV['AWS_ACCESS_KEY'], 
-      secret_access_key: ENV['AWS_SECRET_KEY']
-      )
+      rest_client = Twilio::REST::Client.new account_sid, auth_token
 
       begin
-        response = sns.publish({phone_number: to_phone, message: msg})
+        response = rest_client.messages.create(from: from_number, to: to_phone, body: msg)
 
         puts "sent #{entity[:display_name]} - #{entity[:time_left]} - to #{to_phone}"
 
-      rescue 
-        puts response.read_body
+      rescue Twilio::REST::RestError => e
+        message = e.message
+
+        puts "#{message}"
       end
 
       request_timer += 1

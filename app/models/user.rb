@@ -1,8 +1,6 @@
 require 'uri'
 require 'net/http'
 require 'openssl'
-require 'aws-sdk-sms'
-require 'aws-sdk-sns'
 
 class User < ApplicationRecord
   rolify
@@ -36,23 +34,20 @@ class User < ApplicationRecord
       msg = "AHLE Auction: #{entity[:display_name]} will be ending in less than #{entity[:time_left]} Minutes!".squish
     end
 
-    aws_region = ENV["AWS_SMS_REGION"]
-    aws_key_id = ENV["AWS_ACCESS_KEY"]
-    aws_secret_key = ENV["AWS_SECRET_KEY"]
+    account_sid = ENV["TWL_SID"]
+    auth_token = ENV["TWL_AUTH"]
+    from_number = ENV["TWL_NUM"]
     to_phone = "+1" + self.phone
 
-    sns = Aws::SNS::Client.new(
-      region: ENV['AWS_SMS_REGION'], 
-      access_key_id: ENV['AWS_ACCESS_KEY'], 
-      secret_access_key: ENV['AWS_SECRET_KEY']
-      )
+    rest_client = Twilio::REST::Client.new account_sid, auth_token
 
     begin
-      response = sns.publish({phone_number: to_phone, message: msg})
-      
-      puts "sent Success to #{to_phone}"
-    rescue 
-      puts response.read_body
+        response = rest_client.messages.create(from: from_number, to: to_phone, body: msg)
+
+    rescue Twilio::REST::RestError => e
+        message = e.message
+
+        puts "#{message}"
     end
 
   end
