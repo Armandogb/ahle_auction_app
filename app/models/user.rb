@@ -23,7 +23,7 @@ class User < ApplicationRecord
 
     case message
     when 'welcome'
-      msg = "Welcome to the AHLE Auction! You will recieve text updates on the items you bid on.".squish
+      msg = "Welcome to the AHLE Auction! You will recieve sms updates on the items you bid on and section times remaining. Reply STOP to opt-out of sms updates at anytime.".squish
     when 'outbid'
       msg = "AHLE Auction: You've been outbid on #{entity[:item_name]}! View 'My Items' to rebid!".squish
     when 'high_bid'
