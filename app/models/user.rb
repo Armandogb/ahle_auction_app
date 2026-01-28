@@ -19,37 +19,47 @@ class User < ApplicationRecord
 
   def send_text_message(message,entity)
 
-    bidded_auctions = ENV["MY_BID_URL"]
+      bidded_auctions = ENV["MY_BID_URL"]
 
-    case message
-    when 'welcome'
-      msg = "Welcome to the AHLE Auction! You will recieve sms updates on the items you bid on and section times remaining. Reply STOP to opt-out of sms updates at anytime.".squish
-    when 'outbid'
-      msg = "AHLE Auction: You've been outbid on #{entity[:item_name]}! View 'My Items' to rebid!".squish
-    when 'high_bid'
-      msg = "AHLE Auction: You are the highest bidder on #{entity[:item_name]}!".squish
-    when 'winner'
-      msg = "AHLE Auction: You Won #{entity[:item_name]}! Go claim your prize!".squish
-    when 'time'
-      msg = "AHLE Auction: #{entity[:display_name]} will be ending in less than #{entity[:time_left]} Minutes!".squish
-    end
+      case message
+        when 'welcome'
+          msg = "Welcome to the AHLE Auction! You will recieve sms updates on the items you bid on and section times remaining. Reply STOP to opt-out of sms updates at anytime.".squish
+        when 'outbid'
+          msg = "AHLE Auction: You've been outbid on #{entity[:item_name]}! View 'My Items' to rebid!".squish
+        when 'high_bid'
+          msg = "AHLE Auction: You are the highest bidder on #{entity[:item_name]}!".squish
+        when 'winner'
+          msg = "AHLE Auction: You Won #{entity[:item_name]}! Go claim your prize!".squish
+        when 'time'
+          msg = "AHLE Auction: #{entity[:display_name]} will be ending in less than #{entity[:time_left]} Minutes!".squish
+        when 'opt_in'
+          msg = "start".squish
+        when 'opt_out'
+          msg = "stop".squish
+      end
 
-    account_sid = ENV["TWL_SID"]
-    auth_token = ENV["TWL_AUTH"]
-    from_number = ENV["TWL_NUM"]
-    to_phone = "+1" + self.phone
+      account_sid = ENV["TWL_SID"]
+      auth_token = ENV["TWL_AUTH"]
+      from_number = ENV["TWL_NUM"]
+      to_phone = "+1" + self.phone
 
-    rest_client = Twilio::REST::Client.new account_sid, auth_token
+      rest_client = Twilio::REST::Client.new account_sid, auth_token
 
-    begin
-        response = rest_client.messages.create(from: from_number, to: to_phone, body: msg)
+      begin
+          response = rest_client.messages.create(from: from_number, to: to_phone, body: msg)
+          self.update(receive_sms: true)
 
-    rescue Twilio::REST::RestError => e
-        message = e.message
+      rescue Twilio::REST::RestError => e
+            message = e.code
 
-        puts "#{message}"
-    end
+            puts "#{message}"
+            self.update(receive_sms: false)
 
+
+            return message
+      end
+          
+    
   end
 
 
@@ -61,15 +71,19 @@ class User < ApplicationRecord
   private
 
   def check_sign_up_code
-    admin_code = ENV["SU_ADMIN"].to_s.downcase.squish
-    user_code = self.sign_up_code.downcase.squish
 
-    case user_code
-      when admin_code
-        @set_admin = true
-      else
-        @set_admin = false
+    if self.sign_up_code.present?
+      admin_code = ENV["SU_ADMIN"].to_s.downcase.squish
+      user_code = self.sign_up_code.downcase.squish || "none"
+
+      case user_code
+        when admin_code
+          @set_admin = true
+        else
+          @set_admin = false
+      end
     end
+
   end
 
   def final_steps
@@ -77,7 +91,15 @@ class User < ApplicationRecord
       self.add_role(:admin)
     end
 
-    self.send_text_message('welcome', nil)
+    welcome_text = self.send_text_message('welcome', nil)
+
+    response = welcome_text.to_s
+
+    if response == "21610"
+      puts "No Texts"
+      self.update(receive_sms: false)
+    end
+
   end
 
 end

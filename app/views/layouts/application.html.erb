@@ -24,6 +24,7 @@
   <% if current_user.present? %>
     <% unless action_name == 'auction_timer' %>
       <%= render 'application/nav_bar_top.html.erb' %>
+      <%= render 'application/sms_status_bar.html.erb' %>
     <% end  %>
   <% end %>
 

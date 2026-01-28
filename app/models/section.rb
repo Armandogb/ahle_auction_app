@@ -32,7 +32,7 @@ class Section < ApplicationRecord
     account_sid = ENV["TWL_SID"]
     auth_token = ENV["TWL_AUTH"]
     from_number = ENV["TWL_NUM"]
-    phone_numbers = User.all.pluck(:phone)
+    phone_numbers = User.where(receive_sms: true).pluck(:phone)
 
     msg = "AHLE Auction: #{entity[:display_name]} will be ending in less than #{entity[:time_left]} Minutes!".squish
 

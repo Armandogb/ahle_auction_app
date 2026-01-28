@@ -77,7 +77,7 @@ gem 'gon', '~> 6.4.0'
 gem "fog", '~> 2.3.0'
 gem "fog-aws", '~> 3.15.0'
 gem 'carrierwave', '~> 2.0'
-gem 'twilio-ruby', '~> 5.74.1'
+gem 'twilio-ruby', '~> 7.10'
 gem 'jquery-datatables', '~> 1.10.20'
 gem 'mimemagic', github: 'mimemagicrb/mimemagic', ref: '01f92d86d15d85cfd0f20dabd025dcbd36a8a60f'
 gem 'write_xlsx', '~> 1.09.5'                          # create spreadsheets
