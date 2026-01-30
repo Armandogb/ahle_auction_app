@@ -29,9 +29,9 @@ namespace :util do
   desc 'send section finishing texts to all users'
   task send_section_ending_texts: :environment do
     sections = Section.where(active: true)
-    ten_minutes = 600
-    five_minutes = 300
-    two_minutes = 120
+    ten_minutes = 620
+    five_minutes = 320
+    two_minutes = 140
     current_time = DateTime.now.strftime('%s').to_i
 
     sections.each do |section|
